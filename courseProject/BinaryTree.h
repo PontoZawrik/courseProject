@@ -1,8 +1,7 @@
 #pragma once
-//#include <iostream>
+#include <iostream>
 #include <string>
 using std::string;
-//using namespace std;
 
 
 struct DataField {
@@ -21,6 +20,8 @@ class BinaryTree {
 private:
 	size_t global_id = 0;
 
+	My_TreeNode* find_el(My_TreeNode*, size_t);
+
 public:
 	My_TreeNode* root = nullptr;
 
@@ -28,22 +29,16 @@ public:
 	BinaryTree(DataField);
 
 	My_TreeNode* find_el(size_t);
-	My_TreeNode* find_el(My_TreeNode*, size_t);
 	bool create_tree(DataField);
 	bool add_node(size_t, DataField);
-
+	void delete_node(My_TreeNode*);
+	void delete_by_id(size_t);
+	void delete_tree();
 };
 
 
 
 
-//void delete_tree(BinaryTree* tree) {
-//	if (tree != nullptr) {
-//		delete_tree(tree->left);
-//		delete_tree(tree->right);
-//		delete tree;
-//	}
-//}
 //
 //void delete_branches(BinaryTree* tree) {
 //	delete_tree(tree->left);

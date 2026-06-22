@@ -70,3 +70,25 @@ bool BinaryTree::add_node(size_t id, DataField data) {
 
 	return true;
 }
+
+
+void BinaryTree::delete_node(My_TreeNode* node) {
+	if (node != nullptr) {
+		delete_node(node->left);
+		delete_node(node->right);
+		delete node;
+	}
+}
+
+void BinaryTree::delete_by_id(size_t id) {
+	My_TreeNode* select = find_el(id);
+	delete_node(select);
+}
+
+void BinaryTree::delete_tree() {
+	if (root != nullptr) {
+		delete_node(root->left);
+		delete_node(root->right);
+		delete root;
+	}
+}

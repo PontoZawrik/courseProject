@@ -138,6 +138,7 @@
     <ClInclude Include="mainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="mainForm.resx">
