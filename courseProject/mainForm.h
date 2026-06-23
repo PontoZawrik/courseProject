@@ -25,9 +25,12 @@ namespace courseProject {
 			//
 			//TODO: äîáàâüòå êîä êîíñòğóêòîğà
 			//
+			PrintCost->ReadOnly = true;
+			PrintCost->BackColor = SystemColors::Window;
+
 			DataField data;
 			data.bankName = "T-bank";
-			data.cost = 1000000;
+			data.cost = 1;
 			tree->create_tree(data);
 			tree->add_node(0, data);
 			tree->add_node(0, data);
@@ -65,6 +68,8 @@ namespace courseProject {
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 	private: System::Windows::Forms::ToolStripMenuItem^ tempToolStripMenuItem;
 	private: System::Windows::Forms::Label^ ErrorInfo;
+	private: System::Windows::Forms::TextBox^ PrintCost;
+
 
 
 
@@ -96,6 +101,7 @@ namespace courseProject {
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->tempToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ErrorInfo = (gcnew System::Windows::Forms::Label());
+			this->PrintCost = (gcnew System::Windows::Forms::TextBox());
 			this->groupBox1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -148,12 +154,13 @@ namespace courseProject {
 			this->CreateTreeBtn->TabIndex = 4;
 			this->CreateTreeBtn->Text = L"Ñîçäàòü äåğåâî";
 			this->CreateTreeBtn->UseVisualStyleBackColor = true;
+			this->CreateTreeBtn->Click += gcnew System::EventHandler(this, &mainForm::CreateTreeBtn_Click);
 			// 
 			// groupBox1
 			// 
 			this->groupBox1->Controls->Add(this->DeleteNodeBtn);
 			this->groupBox1->Controls->Add(this->CalcSumBtn);
-			this->groupBox1->Location = System::Drawing::Point(496, 144);
+			this->groupBox1->Location = System::Drawing::Point(496, 178);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(269, 84);
 			this->groupBox1->TabIndex = 5;
@@ -179,25 +186,28 @@ namespace courseProject {
 			this->CalcSumBtn->TabIndex = 0;
 			this->CalcSumBtn->Text = L"Âû÷èñëèòü ñòîèìîñòü";
 			this->CalcSumBtn->UseVisualStyleBackColor = true;
+			this->CalcSumBtn->Click += gcnew System::EventHandler(this, &mainForm::CalcSumBtn_Click);
 			// 
 			// RebuildTreeBtn
 			// 
-			this->RebuildTreeBtn->Location = System::Drawing::Point(503, 235);
+			this->RebuildTreeBtn->Location = System::Drawing::Point(503, 269);
 			this->RebuildTreeBtn->Name = L"RebuildTreeBtn";
 			this->RebuildTreeBtn->Size = System::Drawing::Size(256, 25);
 			this->RebuildTreeBtn->TabIndex = 6;
 			this->RebuildTreeBtn->Text = L"Ïåğåñòğîèòü äåğåâî";
 			this->RebuildTreeBtn->UseVisualStyleBackColor = true;
+			this->RebuildTreeBtn->Click += gcnew System::EventHandler(this, &mainForm::RebuildTreeBtn_Click);
 			// 
 			// DeleteTreeBtn
 			// 
 			this->DeleteTreeBtn->ForeColor = System::Drawing::Color::Red;
-			this->DeleteTreeBtn->Location = System::Drawing::Point(503, 264);
+			this->DeleteTreeBtn->Location = System::Drawing::Point(503, 298);
 			this->DeleteTreeBtn->Name = L"DeleteTreeBtn";
 			this->DeleteTreeBtn->Size = System::Drawing::Size(256, 25);
 			this->DeleteTreeBtn->TabIndex = 7;
 			this->DeleteTreeBtn->Text = L"Óäàëèòü äåğåâî";
 			this->DeleteTreeBtn->UseVisualStyleBackColor = true;
+			this->DeleteTreeBtn->Click += gcnew System::EventHandler(this, &mainForm::DeleteTreeBtn_Click);
 			// 
 			// menuStrip1
 			// 
@@ -219,16 +229,26 @@ namespace courseProject {
 			// 
 			this->ErrorInfo->AutoSize = true;
 			this->ErrorInfo->ForeColor = System::Drawing::Color::Red;
-			this->ErrorInfo->Location = System::Drawing::Point(500, 121);
+			this->ErrorInfo->Location = System::Drawing::Point(502, 122);
 			this->ErrorInfo->Name = L"ErrorInfo";
 			this->ErrorInfo->Size = System::Drawing::Size(0, 16);
 			this->ErrorInfo->TabIndex = 9;
+			// 
+			// PrintCost
+			// 
+			this->PrintCost->ForeColor = System::Drawing::Color::Gray;
+			this->PrintCost->Location = System::Drawing::Point(496, 150);
+			this->PrintCost->Name = L"PrintCost";
+			this->PrintCost->Size = System::Drawing::Size(270, 22);
+			this->PrintCost->TabIndex = 10;
+			this->PrintCost->Text = L"Còîèìîñòü ôèëèàëà";
 			// 
 			// mainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(796, 426);
+			this->Controls->Add(this->PrintCost);
 			this->Controls->Add(this->ErrorInfo);
 			this->Controls->Add(this->DeleteTreeBtn);
 			this->Controls->Add(this->RebuildTreeBtn);
@@ -251,17 +271,17 @@ namespace courseProject {
 		}
 #pragma endregion
 		private: bool RebuildTree(BinaryTree* tree) {
+			treeView1->Nodes->Clear();
 			if (!tree->root) {
 				return false;
 			}
-
-			treeView1->Nodes->Clear();
 
 			TreeNode^ rootNode = gcnew TreeNode(ToSysString(tree->root->data_field.bankName));
 			rootNode->Tag = tree->root->id;
 			treeView1->Nodes->Add(rootNode);
 
-			BuildTree(rootNode, tree->root);
+			BuildTree(rootNode, tree->root->left);
+			BuildTree(rootNode, tree->root->right);
 			treeView1->ExpandAll();
 			return true;
 		}
@@ -283,7 +303,7 @@ namespace courseProject {
 	// Îáğàáîò÷èêè
 		private: System::Void AddNodeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
 			TreeNode^ selected = treeView1->SelectedNode;
-			if (selected) {
+			if (selected && InpName->Text != "Ââåäèòå íàçâàíèå:" && InpCost->Text != "Ââåäèòå ñòîèìîñòü:") {
 				DataField data;
 				data.bankName = ToStdString(InpName->Text);
 				data.cost = Convert::ToInt32(InpCost->Text);
@@ -298,6 +318,34 @@ namespace courseProject {
 			if (selected) {
 				tree->delete_by_id((size_t)selected->Tag);
 				RebuildTree(tree);
+			}
+		}
+
+		private: System::Void CreateTreeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (!tree->root && InpName->Text != "Ââåäèòå íàçâàíèå:" && InpCost->Text != "Ââåäèòå ñòîèìîñòü:") {
+				DataField data;
+				data.bankName = ToStdString(InpName->Text);
+				data.cost = Convert::ToInt32(InpCost->Text);
+
+				tree->create_tree(data);
+				RebuildTree(tree);
+			}
+		}
+
+		private: System::Void DeleteTreeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+			tree->delete_tree();
+			RebuildTree(tree);
+		}
+
+		private: System::Void RebuildTreeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+			RebuildTree(tree);
+		}
+
+		private: System::Void CalcSumBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+			TreeNode^ selected = treeView1->SelectedNode;
+			if (selected) {
+				PrintCost->ForeColor = Color::Black;
+				PrintCost->Text = Convert::ToString(tree->calc_sum((size_t)selected->Tag));
 			}
 		}
 

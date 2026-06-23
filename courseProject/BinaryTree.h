@@ -21,6 +21,10 @@ private:
 	size_t global_id = 0;
 
 	My_TreeNode* find_el(My_TreeNode*, size_t);
+	My_TreeNode* find_parent(My_TreeNode*, size_t);
+	void delete_node(My_TreeNode*);
+	long int calc_sum(My_TreeNode*);
+
 
 public:
 	My_TreeNode* root = nullptr;
@@ -29,11 +33,12 @@ public:
 	BinaryTree(DataField);
 
 	My_TreeNode* find_el(size_t);
+	My_TreeNode* find_parent(size_t);
 	bool create_tree(DataField);
 	bool add_node(size_t, DataField);
-	void delete_node(My_TreeNode*);
 	void delete_by_id(size_t);
 	void delete_tree();
+	long int calc_sum(size_t);
 };
 
 
