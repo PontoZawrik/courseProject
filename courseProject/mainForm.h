@@ -69,6 +69,8 @@ namespace courseProject {
 	private: System::Windows::Forms::ToolStripMenuItem^ tempToolStripMenuItem;
 	private: System::Windows::Forms::Label^ ErrorInfo;
 	private: System::Windows::Forms::TextBox^ PrintCost;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label2;
 
 
 
@@ -102,6 +104,8 @@ namespace courseProject {
 			this->tempToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ErrorInfo = (gcnew System::Windows::Forms::Label());
 			this->PrintCost = (gcnew System::Windows::Forms::TextBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->groupBox1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -116,7 +120,7 @@ namespace courseProject {
 			// InpName
 			// 
 			this->InpName->ForeColor = System::Drawing::Color::Gray;
-			this->InpName->Location = System::Drawing::Point(495, 31);
+			this->InpName->Location = System::Drawing::Point(495, 53);
 			this->InpName->Name = L"InpName";
 			this->InpName->Size = System::Drawing::Size(270, 22);
 			this->InpName->TabIndex = 1;
@@ -127,7 +131,7 @@ namespace courseProject {
 			// InpCost
 			// 
 			this->InpCost->ForeColor = System::Drawing::Color::Gray;
-			this->InpCost->Location = System::Drawing::Point(495, 59);
+			this->InpCost->Location = System::Drawing::Point(495, 97);
 			this->InpCost->Name = L"InpCost";
 			this->InpCost->Size = System::Drawing::Size(270, 22);
 			this->InpCost->TabIndex = 2;
@@ -138,7 +142,7 @@ namespace courseProject {
 			// 
 			// AddNodeBtn
 			// 
-			this->AddNodeBtn->Location = System::Drawing::Point(495, 87);
+			this->AddNodeBtn->Location = System::Drawing::Point(495, 125);
 			this->AddNodeBtn->Name = L"AddNodeBtn";
 			this->AddNodeBtn->Size = System::Drawing::Size(132, 25);
 			this->AddNodeBtn->TabIndex = 3;
@@ -148,7 +152,7 @@ namespace courseProject {
 			// 
 			// CreateTreeBtn
 			// 
-			this->CreateTreeBtn->Location = System::Drawing::Point(633, 87);
+			this->CreateTreeBtn->Location = System::Drawing::Point(633, 125);
 			this->CreateTreeBtn->Name = L"CreateTreeBtn";
 			this->CreateTreeBtn->Size = System::Drawing::Size(132, 25);
 			this->CreateTreeBtn->TabIndex = 4;
@@ -160,7 +164,7 @@ namespace courseProject {
 			// 
 			this->groupBox1->Controls->Add(this->DeleteNodeBtn);
 			this->groupBox1->Controls->Add(this->CalcSumBtn);
-			this->groupBox1->Location = System::Drawing::Point(496, 178);
+			this->groupBox1->Location = System::Drawing::Point(496, 217);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(269, 84);
 			this->groupBox1->TabIndex = 5;
@@ -190,7 +194,7 @@ namespace courseProject {
 			// 
 			// RebuildTreeBtn
 			// 
-			this->RebuildTreeBtn->Location = System::Drawing::Point(503, 269);
+			this->RebuildTreeBtn->Location = System::Drawing::Point(503, 308);
 			this->RebuildTreeBtn->Name = L"RebuildTreeBtn";
 			this->RebuildTreeBtn->Size = System::Drawing::Size(256, 25);
 			this->RebuildTreeBtn->TabIndex = 6;
@@ -201,7 +205,7 @@ namespace courseProject {
 			// DeleteTreeBtn
 			// 
 			this->DeleteTreeBtn->ForeColor = System::Drawing::Color::Red;
-			this->DeleteTreeBtn->Location = System::Drawing::Point(503, 298);
+			this->DeleteTreeBtn->Location = System::Drawing::Point(503, 337);
 			this->DeleteTreeBtn->Name = L"DeleteTreeBtn";
 			this->DeleteTreeBtn->Size = System::Drawing::Size(256, 25);
 			this->DeleteTreeBtn->TabIndex = 7;
@@ -215,7 +219,7 @@ namespace courseProject {
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tempToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(796, 28);
+			this->menuStrip1->Size = System::Drawing::Size(796, 30);
 			this->menuStrip1->TabIndex = 8;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -229,7 +233,7 @@ namespace courseProject {
 			// 
 			this->ErrorInfo->AutoSize = true;
 			this->ErrorInfo->ForeColor = System::Drawing::Color::Red;
-			this->ErrorInfo->Location = System::Drawing::Point(502, 122);
+			this->ErrorInfo->Location = System::Drawing::Point(502, 161);
 			this->ErrorInfo->Name = L"ErrorInfo";
 			this->ErrorInfo->Size = System::Drawing::Size(0, 16);
 			this->ErrorInfo->TabIndex = 9;
@@ -237,17 +241,37 @@ namespace courseProject {
 			// PrintCost
 			// 
 			this->PrintCost->ForeColor = System::Drawing::Color::Gray;
-			this->PrintCost->Location = System::Drawing::Point(496, 150);
+			this->PrintCost->Location = System::Drawing::Point(496, 189);
 			this->PrintCost->Name = L"PrintCost";
 			this->PrintCost->Size = System::Drawing::Size(270, 22);
 			this->PrintCost->TabIndex = 10;
 			this->PrintCost->Text = L"Cтоимость филиала";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(495, 36);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(76, 16);
+			this->label1->TabIndex = 11;
+			this->label1->Text = L"Ќазвание:";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(495, 81);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(80, 16);
+			this->label2->TabIndex = 12;
+			this->label2->Text = L"—тоимость:";
 			// 
 			// mainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(796, 426);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
 			this->Controls->Add(this->PrintCost);
 			this->Controls->Add(this->ErrorInfo);
 			this->Controls->Add(this->DeleteTreeBtn);
@@ -270,118 +294,120 @@ namespace courseProject {
 
 		}
 #pragma endregion
-		private: bool RebuildTree(BinaryTree* tree) {
-			treeView1->Nodes->Clear();
-			if (!tree->root) {
-				return false;
-			}
-
-			TreeNode^ rootNode = gcnew TreeNode(ToSysString(tree->root->data_field.bankName));
-			rootNode->Tag = tree->root->id;
-			treeView1->Nodes->Add(rootNode);
-
-			BuildTree(rootNode, tree->root->left);
-			BuildTree(rootNode, tree->root->right);
-			treeView1->ExpandAll();
-			return true;
+	private: bool RebuildTree(BinaryTree* tree) {
+		treeView1->Nodes->Clear();
+		if (!tree->root) {
+			return false;
 		}
+
+		TreeNode^ rootNode = gcnew TreeNode(ToSysString(tree->root->data_field.bankName));
+		rootNode->Tag = tree->root->id;
+		treeView1->Nodes->Add(rootNode);
+
+		BuildTree(rootNode, tree->root->left);
+		BuildTree(rootNode, tree->root->right);
+		treeView1->ExpandAll();
+		return true;
+	}
 			
-		void BuildTree(TreeNode^ parentNode, My_TreeNode* node) {
-			if (node == nullptr) {
-				return;
-			}
-
-			TreeNode^ current = gcnew TreeNode(ToSysString(node->data_field.bankName));
-			current->Tag = node->id;
-			parentNode->Nodes->Add(current);
-
-			BuildTree(current, node->left);
-			BuildTree(current, node->right);
+	void BuildTree(TreeNode^ parentNode, My_TreeNode* node) {
+		if (node == nullptr) {
+			return;
 		}
 
+		TreeNode^ current = gcnew TreeNode(ToSysString(node->data_field.bankName));
+		current->Tag = node->id;
+		parentNode->Nodes->Add(current);
 
-	// ќбработчики
-		private: System::Void AddNodeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-			TreeNode^ selected = treeView1->SelectedNode;
-			if (selected && InpName->Text != "¬ведите название:" && InpCost->Text != "¬ведите стоимость:") {
-				DataField data;
-				data.bankName = ToStdString(InpName->Text);
-				data.cost = Convert::ToInt32(InpCost->Text);
+		BuildTree(current, node->left);
+		BuildTree(current, node->right);
+	}
 
-				tree->add_node((size_t)selected->Tag, data);
-				RebuildTree(tree);
-			}
-		}
 
-		private: System::Void DeleteNodeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-			TreeNode^ selected = treeView1->SelectedNode;
-			if (selected) {
-				tree->delete_by_id((size_t)selected->Tag);
-				RebuildTree(tree);
-			}
-		}
 
-		private: System::Void CreateTreeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (!tree->root && InpName->Text != "¬ведите название:" && InpCost->Text != "¬ведите стоимость:") {
-				DataField data;
-				data.bankName = ToStdString(InpName->Text);
-				data.cost = Convert::ToInt32(InpCost->Text);
+// ќбработчики
+	private: System::Void AddNodeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		TreeNode^ selected = treeView1->SelectedNode;
+		if (selected && InpName->Text != "¬ведите название:" && InpCost->Text != "¬ведите стоимость:") {
+			DataField data;
+			data.bankName = ToStdString(InpName->Text);
+			data.cost = Convert::ToInt32(InpCost->Text);
 
-				tree->create_tree(data);
-				RebuildTree(tree);
-			}
-		}
-
-		private: System::Void DeleteTreeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-			tree->delete_tree();
+			tree->add_node((size_t)selected->Tag, data);
 			RebuildTree(tree);
 		}
+	}
 
-		private: System::Void RebuildTreeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void DeleteNodeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		TreeNode^ selected = treeView1->SelectedNode;
+		if (selected) {
+			tree->delete_by_id((size_t)selected->Tag);
 			RebuildTree(tree);
 		}
+	}
 
-		private: System::Void CalcSumBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-			TreeNode^ selected = treeView1->SelectedNode;
-			if (selected) {
-				PrintCost->ForeColor = Color::Black;
-				PrintCost->Text = Convert::ToString(tree->calc_sum((size_t)selected->Tag));
-			}
+	private: System::Void CreateTreeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (!tree->root && InpName->Text != "¬ведите название:" && InpCost->Text != "¬ведите стоимость:") {
+			DataField data;
+			data.bankName = ToStdString(InpName->Text);
+			data.cost = Convert::ToInt32(InpCost->Text);
+
+			tree->create_tree(data);
+			RebuildTree(tree);
 		}
+	}
+
+	private: System::Void DeleteTreeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		tree->delete_tree();
+		RebuildTree(tree);
+	}
+
+	private: System::Void RebuildTreeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		RebuildTree(tree);
+	}
+
+	private: System::Void CalcSumBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		TreeNode^ selected = treeView1->SelectedNode;
+		if (selected) {
+			PrintCost->ForeColor = Color::Black;
+			PrintCost->Text = Convert::ToString(tree->calc_sum((size_t)selected->Tag));
+		}
+	}
 
 
-		// textBox ¬вода названи€
-		private: System::Void InpName_Enter(System::Object^ sender, System::EventArgs^ e) {
-			if (InpName->Text == "¬ведите название:") {
-				InpName->Text = "";
-				InpName->ForeColor = Color::Black;
-			}
-		}
-		private: System::Void InpName_Leave(System::Object^ sender, System::EventArgs^ e) {
-			if (InpName->Text == "") {
-				InpName->Text = "¬ведите название:";
-				InpName->ForeColor = Color::Gray;
-			}
-		}
 
-		// textBox ¬вода стоимости
-		private: System::Void InpCost_Enter(System::Object^ sender, System::EventArgs^ e) {
-			if (InpCost->Text == "¬ведите стоимость:") {
-				InpCost->Text = "";
-				InpCost->ForeColor = Color::Black;
-			}
+	// textBox ¬вода названи€
+	private: System::Void InpName_Enter(System::Object^ sender, System::EventArgs^ e) {
+		if (InpName->Text == "¬ведите название:") {
+			InpName->Text = "";
+			InpName->ForeColor = Color::Black;
 		}
-		private: System::Void InpCost_Leave(System::Object^ sender, System::EventArgs^ e) {
-			if (InpCost->Text == "") {
-				InpCost->Text = "¬ведите стоимость:";
-				InpCost->ForeColor = Color::Gray;
-			}
+	}
+	private: System::Void InpName_Leave(System::Object^ sender, System::EventArgs^ e) {
+		if (InpName->Text == "") {
+			InpName->Text = "¬ведите название:";
+			InpName->ForeColor = Color::Gray;
 		}
-		private: System::Void InpCost_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-			if (!Char::IsDigit(e->KeyChar) && !Char::IsControl(e->KeyChar) && e->KeyChar != '-') {
-				e->Handled = true;
-			}
+	}
+
+	// textBox ¬вода стоимости
+	private: System::Void InpCost_Enter(System::Object^ sender, System::EventArgs^ e) {
+		if (InpCost->Text == "¬ведите стоимость:") {
+			InpCost->Text = "";
+			InpCost->ForeColor = Color::Black;
 		}
+	}
+	private: System::Void InpCost_Leave(System::Object^ sender, System::EventArgs^ e) {
+		if (InpCost->Text == "") {
+			InpCost->Text = "¬ведите стоимость:";
+			InpCost->ForeColor = Color::Gray;
+		}
+	}
+	private: System::Void InpCost_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		if (!Char::IsDigit(e->KeyChar) && !Char::IsControl(e->KeyChar) && e->KeyChar != '-') {
+			e->Handled = true;
+		}
+	}
 
 };
 }

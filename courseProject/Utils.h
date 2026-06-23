@@ -16,6 +16,6 @@ inline std::string ToStdString(String^ str) {
 }
 
 
-String^ ToSysString(const std::string& str) {
+inline String^ ToSysString(const std::string& str) {
     return gcnew String(str.c_str());
 }

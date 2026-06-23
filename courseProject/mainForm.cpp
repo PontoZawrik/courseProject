@@ -1,4 +1,5 @@
 #include "mainForm.h"
+#include "LoginForm.h"
 #include <Windows.h>
 using namespace courseProject;
 
@@ -6,6 +7,12 @@ using namespace courseProject;
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
-	Application::Run(gcnew mainForm());
+
+	LoginForm^ login = gcnew LoginForm();
+
+	if (login->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+		Application::Run(gcnew mainForm());
+	}
+
 	return 0;
 }
