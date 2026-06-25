@@ -1,6 +1,7 @@
 #pragma once
 #include "Utils.h"
 #include "BinaryTree.h"
+#include "UserManage.h"
 
 namespace courseProject {
 
@@ -18,6 +19,19 @@ namespace courseProject {
 	{
 	private:
 		BinaryTree* tree = new BinaryTree();
+
+	private: System::Windows::Forms::ToolStripMenuItem^ SaveChangesToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ RebuildTreeToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ DeleteTreeToolStripMenuItem;
+
+	private: System::Windows::Forms::ToolStripMenuItem^ LogOutToolStripMenuItem;
+
+
+
+
+	private: System::Windows::Forms::ToolStripMenuItem^ âèäToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ ñïðàâêàToolStripMenuItem;
+		   User* currentUser;
 	public:
 		mainForm(void)
 		{
@@ -36,6 +50,27 @@ namespace courseProject {
 			tree->add_node(0, data);
 			tree->add_node(1, data);
 			RebuildTree(tree);
+		}
+
+		mainForm(User* user) {
+			InitializeComponent();
+			currentUser = user;
+			this->Text = "Äîáðî ïîæàëîâàòü " + ToSysString(user->username);
+
+			load_tree_file(user->id, tree);
+			RebuildTree(tree);
+
+			if (!user->isAdmin) {
+				this->Text += " (Ãîñòåâîé ðåæèì)";
+				DeleteTreeBtn->Visible = false;
+				DeleteNodeBtn->Visible = false;
+
+				groupBox1->Height -= 23;
+				this->RebuildTreeBtn->Location = System::Drawing::Point(
+					this->RebuildTreeBtn->Location.X, 
+					this->RebuildTreeBtn->Location.Y - 25
+				);
+			}
 		}
 
 	protected:
@@ -102,6 +137,12 @@ namespace courseProject {
 			this->DeleteTreeBtn = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->tempToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->SaveChangesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->RebuildTreeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->DeleteTreeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->LogOutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->âèäToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ñïðàâêàToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ErrorInfo = (gcnew System::Windows::Forms::Label());
 			this->PrintCost = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
@@ -216,18 +257,65 @@ namespace courseProject {
 			// menuStrip1
 			// 
 			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tempToolStripMenuItem });
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->tempToolStripMenuItem,
+					this->âèäToolStripMenuItem, this->ñïðàâêàToolStripMenuItem
+			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(796, 30);
+			this->menuStrip1->Size = System::Drawing::Size(796, 28);
 			this->menuStrip1->TabIndex = 8;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
 			// tempToolStripMenuItem
 			// 
+			this->tempToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+				this->SaveChangesToolStripMenuItem,
+					this->RebuildTreeToolStripMenuItem, this->DeleteTreeToolStripMenuItem, this->LogOutToolStripMenuItem
+			});
 			this->tempToolStripMenuItem->Name = L"tempToolStripMenuItem";
-			this->tempToolStripMenuItem->Size = System::Drawing::Size(60, 24);
-			this->tempToolStripMenuItem->Text = L"Temp";
+			this->tempToolStripMenuItem->Size = System::Drawing::Size(79, 24);
+			this->tempToolStripMenuItem->Text = L"Ãëàâíàÿ";
+			// 
+			// SaveChangesToolStripMenuItem
+			// 
+			this->SaveChangesToolStripMenuItem->Name = L"SaveChangesToolStripMenuItem";
+			this->SaveChangesToolStripMenuItem->Size = System::Drawing::Size(248, 26);
+			this->SaveChangesToolStripMenuItem->Text = L"Ñîõðàíèòü èçìåíåíèÿ";
+			this->SaveChangesToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::SaveChangesToolStripMenuItem_Click);
+			// 
+			// RebuildTreeToolStripMenuItem
+			// 
+			this->RebuildTreeToolStripMenuItem->Name = L"RebuildTreeToolStripMenuItem";
+			this->RebuildTreeToolStripMenuItem->Size = System::Drawing::Size(248, 26);
+			this->RebuildTreeToolStripMenuItem->Text = L"Ïåðåñòðîèòü äåðåâî";
+			this->RebuildTreeToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::RebuildTreeToolStripMenuItem_Click);
+			// 
+			// DeleteTreeToolStripMenuItem
+			// 
+			this->DeleteTreeToolStripMenuItem->Name = L"DeleteTreeToolStripMenuItem";
+			this->DeleteTreeToolStripMenuItem->Size = System::Drawing::Size(248, 26);
+			this->DeleteTreeToolStripMenuItem->Text = L"Óäàëèòü äåðåâî";
+			this->DeleteTreeToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::DeleteTreeToolStripMenuItem_Click);
+			// 
+			// LogOutToolStripMenuItem
+			// 
+			this->LogOutToolStripMenuItem->Name = L"LogOutToolStripMenuItem";
+			this->LogOutToolStripMenuItem->Size = System::Drawing::Size(248, 26);
+			this->LogOutToolStripMenuItem->Text = L"Âûéòè èç ñèñòåìû";
+			this->LogOutToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::LogOutToolStripMenuItem_Click);
+			// 
+			// âèäToolStripMenuItem
+			// 
+			this->âèäToolStripMenuItem->Name = L"âèäToolStripMenuItem";
+			this->âèäToolStripMenuItem->Size = System::Drawing::Size(49, 24);
+			this->âèäToolStripMenuItem->Text = L"Âèä";
+			// 
+			// ñïðàâêàToolStripMenuItem
+			// 
+			this->ñïðàâêàToolStripMenuItem->Name = L"ñïðàâêàToolStripMenuItem";
+			this->ñïðàâêàToolStripMenuItem->Size = System::Drawing::Size(81, 24);
+			this->ñïðàâêàToolStripMenuItem->Text = L"Ñïðàâêà";
 			// 
 			// ErrorInfo
 			// 
@@ -294,18 +382,20 @@ namespace courseProject {
 
 		}
 #pragma endregion
+// Ïîñòðîåíèå äåðåâà
 	private: bool RebuildTree(BinaryTree* tree) {
 		treeView1->Nodes->Clear();
-		if (!tree->root) {
+		My_TreeNode* root = tree->get_root();
+		if (!root) {
 			return false;
 		}
 
-		TreeNode^ rootNode = gcnew TreeNode(ToSysString(tree->root->data_field.bankName));
-		rootNode->Tag = tree->root->id;
+		TreeNode^ rootNode = gcnew TreeNode(ToSysString(root->data_field.bankName));
+		rootNode->Tag = root->id;
 		treeView1->Nodes->Add(rootNode);
 
-		BuildTree(rootNode, tree->root->left);
-		BuildTree(rootNode, tree->root->right);
+		BuildTree(rootNode, root->left);
+		BuildTree(rootNode, root->right);
 		treeView1->ExpandAll();
 		return true;
 	}
@@ -347,7 +437,7 @@ namespace courseProject {
 	}
 
 	private: System::Void CreateTreeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (!tree->root && InpName->Text != "Ââåäèòå íàçâàíèå:" && InpCost->Text != "Ââåäèòå ñòîèìîñòü:") {
+		if (!tree->get_root() && InpName->Text != "Ââåäèòå íàçâàíèå:" && InpCost->Text != "Ââåäèòå ñòîèìîñòü:") {
 			DataField data;
 			data.bankName = ToStdString(InpName->Text);
 			data.cost = Convert::ToInt32(InpCost->Text);
@@ -372,6 +462,25 @@ namespace courseProject {
 			PrintCost->ForeColor = Color::Black;
 			PrintCost->Text = Convert::ToString(tree->calc_sum((size_t)selected->Tag));
 		}
+	}
+
+
+
+	// MenuStrip
+	private: System::Void SaveChangesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		update_tree_file(currentUser->id, tree);
+	}
+	private: System::Void RebuildTreeToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		RebuildTree(tree);
+	}
+	private: System::Void DeleteTreeToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		tree->delete_tree();
+		RebuildTree(tree);
+	}
+	private: System::Void LogOutToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		update_tree_file(currentUser->id, tree);
+		this->DialogResult = System::Windows::Forms::DialogResult::Retry;
+		this->Close();
 	}
 
 

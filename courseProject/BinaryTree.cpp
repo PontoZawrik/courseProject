@@ -86,6 +86,13 @@ bool BinaryTree::create_tree(DataField data) {
 	return true;
 }
 
+My_TreeNode* BinaryTree::create_node(DataField data) {
+	My_TreeNode* node = new My_TreeNode;
+	node->id = global_id++;
+	node->data_field = data;
+	return node;
+}
+
 bool BinaryTree::add_node(size_t id, DataField data) {
 	My_TreeNode* parent = find_el(id);
 
@@ -96,8 +103,6 @@ bool BinaryTree::add_node(size_t id, DataField data) {
 	My_TreeNode* new_node = new My_TreeNode;
 	new_node->data_field = data;
 	new_node->id = global_id++;
-	new_node->left = nullptr;
-	new_node->right = nullptr;
 
 	if (!parent->left) {
 		parent->left = new_node;
@@ -148,4 +153,15 @@ long int BinaryTree::calc_sum(My_TreeNode* node) {
 
 long int BinaryTree::calc_sum(size_t id) {
 	return calc_sum(find_el(id));
+}
+
+
+
+// getters
+My_TreeNode* BinaryTree::get_root() {
+	return root;
+}
+
+size_t BinaryTree::get_global_id() {
+	return global_id;
 }

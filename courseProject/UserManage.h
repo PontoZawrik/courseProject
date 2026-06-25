@@ -1,8 +1,13 @@
 #pragma once
 #include <fstream>
+#include <sstream>
+#include "BinaryTree.h"
+
 using std::string;
 
-#define FILE_PATH "../data/users.txt"
+#define USER_FILE_PATH "./users.txt"
+#define TREE_FILE_PATH "./trees.dat"
+#define TEMP_FILE_PATH "./temp.dat"
 
 struct User {
     size_t id;
@@ -11,7 +16,14 @@ struct User {
     bool isAdmin;
 };
 
-bool LoginUser(const string&, const string&, User&);
+bool LoginUser(const string&, const string&, User*);
 bool UserExists(const string&);
 int GetNextUserID();
-bool RegisterUser(const string&, const string&, const bool&);
+int RegisterUser(const string&, const string&, const bool&);
+
+void save_tree_stream(My_TreeNode*, std::ostream&);
+void save_tree_file(int user_id, BinaryTree* tree);
+My_TreeNode* load_tree_stream(std::istream&, BinaryTree*);
+bool load_tree_file(int user_id, BinaryTree* tree);
+void delete_tree_file(int);
+void update_tree_file(int user_id, BinaryTree* tree);
