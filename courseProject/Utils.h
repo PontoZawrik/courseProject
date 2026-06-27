@@ -4,6 +4,7 @@
 
 using System::String;
 using System::Collections::Generic::Dictionary;
+using System::Drawing::Color;
 
 
 inline std::string ToStdString(String^ str) {
@@ -96,15 +97,15 @@ public:
         return key;
     }
 
-    //static Color GetThemeT() {
-    //    switch (CurrentTheme) {
-    //        case Theme::White: return Color::White;
-    //        case Theme::Blue: return Color::Blue;
-    //        case Theme::Purple: return Color::Purple;
-    //    }
+    static Color GetTheme() {
+        switch (CurrentTheme) {
+            case Theme::White: return Color::White;
+            case Theme::Blue: return Color::Aqua;
+            case Theme::Purple: return Color::Purple;
+        }
 
-    //    return Color::White;
-    //}
+        return Color::White;
+    }
 
 private:
     static Dictionary<String^, String^>^ CreateRU() {
@@ -143,6 +144,9 @@ private:
         dict->Add("SelectionError", "Выберите филиал.");
         dict->Add("ExistingTreeError", "Удалите существующее дерево.");
         dict->Add("EmptyFieldsError", "Заполните поля.");
+        dict->Add("PassDiffError", "Пароли должны совпадать.");
+        dict->Add("ExistingUserError", "Данный пользователь уже существует.");
+        dict->Add("LogInError", "Ошибка входа.");
 
         dict->Add("WelcomeStr", "Добро пожаловать ");
         dict->Add("SelectedMode", " (Гостевой режим)");
@@ -203,6 +207,9 @@ private:
         dict->Add("SelectionError", "Select a branch.");
         dict->Add("ExistingTreeError", "Delete the existing tree.");
         dict->Add("EmptyFieldsError", "Fill in the fields.");
+        dict->Add("PassDiffError", "Passwords must match.");
+        dict->Add("ExistingUserError", "This user already exists.");
+        dict->Add("LogInError", "Login error.");
 
         dict->Add("WelcomeStr", "Welcome ");
         dict->Add("SelectedMode", " (Guest mode)");
@@ -262,6 +269,9 @@ private:
         dict->Add("SelectionError", "Выберыце філіял.");
         dict->Add("ExistingTreeError", "Выдаліце існуючае дрэва.");
         dict->Add("EmptyFieldsError", "Запоўніце палі.");
+        dict->Add("PassDiffError", "Паролі павінны супадаць.");
+        dict->Add("ExistingUserError", "Гэты карыстальнік ужо існуе.");
+        dict->Add("LogInError", "Памылка ўваходу.");
 
         dict->Add("WelcomeStr", "Сардэчна запрашаем ");
         dict->Add("SelectedMode", " (Гасцявы рэжым)");

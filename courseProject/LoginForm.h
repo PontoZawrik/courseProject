@@ -31,6 +31,7 @@ namespace courseProject {
 			RegistrationBtn->Visible = false;
 			BackToLogBtn->Visible = false;
 
+			this->BackColor = GlobalSettings::GetTheme();
 			ApplySettings();
 		}
 
@@ -82,6 +83,8 @@ namespace courseProject {
 	private: System::Windows::Forms::ToolStripMenuItem^ BlueToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ PurpleToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ HelpToolStripMenuItem;
+	private: System::Windows::Forms::Label^ ErrorInfo;
+
 
 
 
@@ -125,6 +128,7 @@ namespace courseProject {
 			this->BlueToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->PurpleToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->HelpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ErrorInfo = (gcnew System::Windows::Forms::Label());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -183,7 +187,7 @@ namespace courseProject {
 			// 
 			// LogInBtn
 			// 
-			this->LogInBtn->Location = System::Drawing::Point(114, 244);
+			this->LogInBtn->Location = System::Drawing::Point(114, 261);
 			this->LogInBtn->Name = L"LogInBtn";
 			this->LogInBtn->Size = System::Drawing::Size(283, 30);
 			this->LogInBtn->TabIndex = 6;
@@ -193,7 +197,7 @@ namespace courseProject {
 			// 
 			// ToRegisterBtn
 			// 
-			this->ToRegisterBtn->Location = System::Drawing::Point(116, 279);
+			this->ToRegisterBtn->Location = System::Drawing::Point(116, 296);
 			this->ToRegisterBtn->Name = L"ToRegisterBtn";
 			this->ToRegisterBtn->Size = System::Drawing::Size(283, 30);
 			this->ToRegisterBtn->TabIndex = 7;
@@ -234,7 +238,7 @@ namespace courseProject {
 			// 
 			// BackToLogBtn
 			// 
-			this->BackToLogBtn->Location = System::Drawing::Point(115, 349);
+			this->BackToLogBtn->Location = System::Drawing::Point(115, 366);
 			this->BackToLogBtn->Name = L"BackToLogBtn";
 			this->BackToLogBtn->Size = System::Drawing::Size(283, 30);
 			this->BackToLogBtn->TabIndex = 12;
@@ -244,7 +248,7 @@ namespace courseProject {
 			// 
 			// RegistrationBtn
 			// 
-			this->RegistrationBtn->Location = System::Drawing::Point(115, 312);
+			this->RegistrationBtn->Location = System::Drawing::Point(115, 329);
 			this->RegistrationBtn->Name = L"RegistrationBtn";
 			this->RegistrationBtn->Size = System::Drawing::Size(283, 30);
 			this->RegistrationBtn->TabIndex = 11;
@@ -261,7 +265,7 @@ namespace courseProject {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(515, 28);
+			this->menuStrip1->Size = System::Drawing::Size(515, 30);
 			this->menuStrip1->TabIndex = 13;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -272,7 +276,7 @@ namespace courseProject {
 					this->ThemeToolStripMenuItem
 			});
 			this->ViewToolStripMenuItem->Name = L"ViewToolStripMenuItem";
-			this->ViewToolStripMenuItem->Size = System::Drawing::Size(49, 24);
+			this->ViewToolStripMenuItem->Size = System::Drawing::Size(49, 26);
 			this->ViewToolStripMenuItem->Text = L"Вид";
 			// 
 			// LanguageToolStripMenuItem
@@ -282,7 +286,7 @@ namespace courseProject {
 					this->LangENToolStripMenuItem, this->LangBYToolStripMenuItem
 			});
 			this->LanguageToolStripMenuItem->Name = L"LanguageToolStripMenuItem";
-			this->LanguageToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->LanguageToolStripMenuItem->Size = System::Drawing::Size(127, 26);
 			this->LanguageToolStripMenuItem->Text = L"Язык";
 			// 
 			// LangRUToolStripMenuItem
@@ -313,41 +317,51 @@ namespace courseProject {
 					this->BlueToolStripMenuItem, this->PurpleToolStripMenuItem
 			});
 			this->ThemeToolStripMenuItem->Name = L"ThemeToolStripMenuItem";
-			this->ThemeToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->ThemeToolStripMenuItem->Size = System::Drawing::Size(127, 26);
 			this->ThemeToolStripMenuItem->Text = L"Тема";
 			// 
 			// WhiteToolStripMenuItem
 			// 
 			this->WhiteToolStripMenuItem->Name = L"WhiteToolStripMenuItem";
-			this->WhiteToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->WhiteToolStripMenuItem->Size = System::Drawing::Size(176, 26);
 			this->WhiteToolStripMenuItem->Text = L"Белая";
 			this->WhiteToolStripMenuItem->Click += gcnew System::EventHandler(this, &LoginForm::WhiteToolStripMenuItem_Click);
 			// 
 			// BlueToolStripMenuItem
 			// 
 			this->BlueToolStripMenuItem->Name = L"BlueToolStripMenuItem";
-			this->BlueToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->BlueToolStripMenuItem->Size = System::Drawing::Size(176, 26);
 			this->BlueToolStripMenuItem->Text = L"Синяя";
 			this->BlueToolStripMenuItem->Click += gcnew System::EventHandler(this, &LoginForm::BlueToolStripMenuItem_Click);
 			// 
 			// PurpleToolStripMenuItem
 			// 
 			this->PurpleToolStripMenuItem->Name = L"PurpleToolStripMenuItem";
-			this->PurpleToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->PurpleToolStripMenuItem->Size = System::Drawing::Size(176, 26);
 			this->PurpleToolStripMenuItem->Text = L"Фиолетовая";
 			this->PurpleToolStripMenuItem->Click += gcnew System::EventHandler(this, &LoginForm::PurpleToolStripMenuItem_Click);
 			// 
 			// HelpToolStripMenuItem
 			// 
 			this->HelpToolStripMenuItem->Name = L"HelpToolStripMenuItem";
-			this->HelpToolStripMenuItem->Size = System::Drawing::Size(81, 24);
+			this->HelpToolStripMenuItem->Size = System::Drawing::Size(81, 26);
 			this->HelpToolStripMenuItem->Text = L"Справка";
+			// 
+			// ErrorInfo
+			// 
+			this->ErrorInfo->AutoSize = true;
+			this->ErrorInfo->ForeColor = System::Drawing::Color::Red;
+			this->ErrorInfo->Location = System::Drawing::Point(116, 240);
+			this->ErrorInfo->Name = L"ErrorInfo";
+			this->ErrorInfo->Size = System::Drawing::Size(0, 16);
+			this->ErrorInfo->TabIndex = 14;
 			// 
 			// LoginForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(515, 484);
+			this->Controls->Add(this->ErrorInfo);
 			this->Controls->Add(this->BackToLogBtn);
 			this->Controls->Add(this->RegistrationBtn);
 			this->Controls->Add(this->IsAdminBox);
@@ -372,7 +386,17 @@ namespace courseProject {
 		}
 #pragma endregion
 	private: System::Void RegistrationBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (PasswordInp->Text == PasswordConfInp->Text) {
+		ResetInputBox();
+
+		if (UsernameInp->Text != GlobalSettings::GetLang("UsernameInp")
+			&& PasswordInp->Text != GlobalSettings::GetLang("PasswordInp")
+			&& PasswordConfInp->Text != GlobalSettings::GetLang("PasswordConfInp"))
+		{
+			if (PasswordInp->Text != PasswordConfInp->Text) {
+				ErrorInfo->Text = GlobalSettings::GetLang("PassDiffError");
+				return;
+			}
+
 			string username = ToStdString(UsernameInp->Text);
 			string password = ToStdString(PasswordInp->Text);
 
@@ -386,20 +410,42 @@ namespace courseProject {
 				this->DialogResult = System::Windows::Forms::DialogResult::OK;
 				this->Close();
 			}
+			else {
+				ErrorInfo->Text = GlobalSettings::GetLang("ExistingUserError");
+			}
+		}
+		else {
+			UsernameInp->ForeColor = (UsernameInp->Text == GlobalSettings::GetLang("UsernameInp") ? Color::Red : UsernameInp->ForeColor);
+			PasswordInp->ForeColor = (PasswordInp->Text == GlobalSettings::GetLang("PasswordInp") ? Color::Red : PasswordInp->ForeColor);
+			PasswordConfInp->ForeColor = (PasswordConfInp->Text == GlobalSettings::GetLang("PasswordConfInp") ? Color::Red : PasswordConfInp->ForeColor);
+			ErrorInfo->Text = GlobalSettings::GetLang("EmptyFieldsError");
 		}
 	}
 
 	private: System::Void LogInBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-		string username = ToStdString(UsernameInp->Text);
-		string password = ToStdString(PasswordInp->Text);
+		if (UsernameInp->Text != GlobalSettings::GetLang("UsernameInp") 
+			&& PasswordInp->Text != GlobalSettings::GetLang("PasswordInp")) 
+		{
+			string username = ToStdString(UsernameInp->Text);
+			string password = ToStdString(PasswordInp->Text);
 
-		if (LoginUser(username, password, currentUser)) {
-			this->DialogResult = System::Windows::Forms::DialogResult::OK;
-			this->Close();
+			if (LoginUser(username, password, currentUser)) {
+				this->DialogResult = System::Windows::Forms::DialogResult::OK;
+				this->Close();
+			}
+			else {
+				ErrorInfo->Text = GlobalSettings::GetLang("EmptyFieldsError");
+			}
+		}
+		else {
+			UsernameInp->ForeColor = (UsernameInp->Text == GlobalSettings::GetLang("UsernameInp") ? Color::Red : UsernameInp->ForeColor);
+			PasswordInp->ForeColor = (PasswordInp->Text == GlobalSettings::GetLang("PasswordInp") ? Color::Red : PasswordInp->ForeColor);
+			ErrorInfo->Text = GlobalSettings::GetLang("EmptyFieldsError");
 		}
 	}
 
 
+// menuStrip
 	// Смена языка
 	private: System::Void LangRUToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		GlobalSettings::CurrentLang = Lang::RU;
@@ -417,20 +463,22 @@ namespace courseProject {
 	// Смена темы
 	private: System::Void WhiteToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		GlobalSettings::CurrentTheme = Theme::White;
-		//this->BackColor = GlobalSettings::GetThemeT();
+		this->BackColor = GlobalSettings::GetTheme();
 	}
 	private: System::Void BlueToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		GlobalSettings::CurrentTheme = Theme::Blue;
-		//this->BackColor = GlobalSettings::GetThemeT();
+		this->BackColor = GlobalSettings::GetTheme();
 	}
 	private: System::Void PurpleToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		GlobalSettings::CurrentTheme = Theme::Purple;
-		//this->BackColor = GlobalSettings::GetThemeT();
+		this->BackColor = GlobalSettings::GetTheme();
 	}
 
 
 	// Переключение форм
 	private: System::Void ToRegisterBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		ResetInputBox();
+
 		PasswordConfLabel->Visible = true;
 		PasswordConfInp->Visible = true;
 		IsAdminBox->Visible = true;
@@ -440,10 +488,13 @@ namespace courseProject {
 		LogInBtn->Visible = false;
 		ToRegisterBtn->Visible = false;
 
+		ErrorInfo->Location = System::Drawing::Point(ErrorInfo->Location.X, ErrorInfo->Location.Y + 55);
 		Header->Text = GlobalSettings::GetLang("RegistrationHeader");
 	}
 
 	private: System::Void BackToLogBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		ResetInputBox();
+
 		PasswordConfLabel->Visible = false;
 		PasswordConfInp->Visible = false;
 		IsAdminBox->Visible = false;
@@ -453,11 +504,12 @@ namespace courseProject {
 		LogInBtn->Visible = true;
 		ToRegisterBtn->Visible = true;
 
+		ErrorInfo->Location = System::Drawing::Point(ErrorInfo->Location.X, ErrorInfo->Location.Y - 55);
 		Header->Text = GlobalSettings::GetLang("LogInHeader");
 	}
 
 
-	// Настройка полей для ввода
+// Настройка полей для ввода
 	private: System::Void UsernameInp_Enter(System::Object^ sender, System::EventArgs^ e) {
 		if (UsernameInp->Text == GlobalSettings::GetLang("UsernameInp")) {
 			UsernameInp->Text = "";
@@ -513,7 +565,15 @@ namespace courseProject {
 	}
 
 
+	// Сброс полей ввода и ошибок
+	void ResetInputBox() {
+		UsernameInp->ForeColor = (UsernameInp->Text == GlobalSettings::GetLang("UsernameInp") ? Color::Gray : Color::Black);
+		PasswordInp->ForeColor = (PasswordInp->Text == GlobalSettings::GetLang("PasswordInp") ? Color::Gray : Color::Black);
+		PasswordConfInp->ForeColor = (PasswordConfInp->Text == GlobalSettings::GetLang("PasswordConfInp") ? Color::Gray : Color::Black);
+		ErrorInfo->Text = "";
+	}
 
+	// Функция локализации LoginForm
 	void ApplySettings() {
 		//this->BackColor = GlobalSettings::GetTheme();
 

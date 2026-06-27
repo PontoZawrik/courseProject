@@ -65,6 +65,7 @@ namespace courseProject {
 			currentUser = user;
 			GlobalSettings::CurrentLang = user->language;
 			GlobalSettings::CurrentTheme = user->theme;
+			this->BackColor = GlobalSettings::GetTheme();
 			ApplySettings();
 
 			load_tree_file(user->id, tree);
@@ -351,21 +352,21 @@ private: System::Windows::Forms::ToolStripMenuItem^ MainToolStripMenuItem;
 			// LangRUToolStripMenuItem
 			// 
 			this->LangRUToolStripMenuItem->Name = L"LangRUToolStripMenuItem";
-			this->LangRUToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->LangRUToolStripMenuItem->Size = System::Drawing::Size(181, 26);
 			this->LangRUToolStripMenuItem->Text = L"Русский";
 			this->LangRUToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::LangRUToolStripMenuItem_Click);
 			// 
 			// LangENToolStripMenuItem
 			// 
 			this->LangENToolStripMenuItem->Name = L"LangENToolStripMenuItem";
-			this->LangENToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->LangENToolStripMenuItem->Size = System::Drawing::Size(181, 26);
 			this->LangENToolStripMenuItem->Text = L"Английский";
 			this->LangENToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::LangENToolStripMenuItem_Click);
 			// 
 			// LangBYToolStripMenuItem
 			// 
 			this->LangBYToolStripMenuItem->Name = L"LangBYToolStripMenuItem";
-			this->LangBYToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->LangBYToolStripMenuItem->Size = System::Drawing::Size(181, 26);
 			this->LangBYToolStripMenuItem->Text = L"Белорусский";
 			this->LangBYToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::LangBYToolStripMenuItem_Click);
 			// 
@@ -382,20 +383,23 @@ private: System::Windows::Forms::ToolStripMenuItem^ MainToolStripMenuItem;
 			// WhiteToolStripMenuItem
 			// 
 			this->WhiteToolStripMenuItem->Name = L"WhiteToolStripMenuItem";
-			this->WhiteToolStripMenuItem->Size = System::Drawing::Size(176, 26);
+			this->WhiteToolStripMenuItem->Size = System::Drawing::Size(224, 26);
 			this->WhiteToolStripMenuItem->Text = L"Белая";
+			this->WhiteToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::WhiteToolStripMenuItem_Click);
 			// 
 			// BlueToolStripMenuItem
 			// 
 			this->BlueToolStripMenuItem->Name = L"BlueToolStripMenuItem";
-			this->BlueToolStripMenuItem->Size = System::Drawing::Size(176, 26);
+			this->BlueToolStripMenuItem->Size = System::Drawing::Size(224, 26);
 			this->BlueToolStripMenuItem->Text = L"Синяя";
+			this->BlueToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::BlueToolStripMenuItem_Click);
 			// 
 			// PurpleToolStripMenuItem
 			// 
 			this->PurpleToolStripMenuItem->Name = L"PurpleToolStripMenuItem";
-			this->PurpleToolStripMenuItem->Size = System::Drawing::Size(176, 26);
+			this->PurpleToolStripMenuItem->Size = System::Drawing::Size(224, 26);
 			this->PurpleToolStripMenuItem->Text = L"Фиолетовая";
+			this->PurpleToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::PurpleToolStripMenuItem_Click);
 			// 
 			// HelpToolStripMenuItem
 			// 
@@ -626,6 +630,23 @@ private: System::Windows::Forms::ToolStripMenuItem^ MainToolStripMenuItem;
 		UpdateUserSettings(currentUser->id);
 	}
 
+	// Вид - Тема
+	private: System::Void WhiteToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		GlobalSettings::CurrentTheme = Theme::White;
+		this->BackColor = GlobalSettings::GetTheme();
+		UpdateUserSettings(currentUser->id);
+	}
+	private: System::Void BlueToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		GlobalSettings::CurrentTheme = Theme::Blue;
+		this->BackColor = GlobalSettings::GetTheme();
+		UpdateUserSettings(currentUser->id);
+	}
+	private: System::Void PurpleToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		GlobalSettings::CurrentTheme = Theme::Purple;
+		this->BackColor = GlobalSettings::GetTheme();
+		UpdateUserSettings(currentUser->id);
+	}
+		   
 
 
 	// textBox Ввода названия
@@ -708,6 +729,5 @@ private: System::Windows::Forms::ToolStripMenuItem^ MainToolStripMenuItem;
 		this->Text = GlobalSettings::GetLang("WelcomeStr") + ToSysString(currentUser->username);
 		this->Text += (currentUser->isAdmin ? "" : GlobalSettings::GetLang("SelectedMode"));
 	}
-
 };
 }
