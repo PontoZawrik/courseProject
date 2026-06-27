@@ -9,15 +9,18 @@ bool LoginUser(const string& username, const string& password, User* result) {
     }
 
     int id;
-    string name, pass;
+    string name, pass, lang, theme;
     int admin;
 
-    while (file >> id >> name >> pass >> admin) {
+
+    while (file >> id >> name >> pass >> admin >> lang >> theme) {
         if (name == username && pass == password) {
             result->id = id;
             result->username = name;
             result->password = pass;
             result->isAdmin = admin;
+            result->language = StringToLang(lang);
+            result->theme = StringToTheme(theme);
 
             return true;
         }
@@ -30,10 +33,10 @@ bool UserExists(const string& username) {
     std::ifstream file(USER_FILE_PATH);
 
     int id;
-    string name, pass;
+    string name, pass, lang, theme;
     int admin;
 
-    while (file >> id >> name >> pass >> admin) {
+    while (file >> id >> name >> pass >> admin >> lang >> theme) {
         if (name == username) {
             return true;
         }
@@ -46,10 +49,10 @@ int GetNextUserID() {
     std::ifstream file(USER_FILE_PATH);
 
     int id, maxId = 0;
-    string name, pass;
+    string name, pass, lang, theme;
     int admin;
 
-    while (file >> id >> name >> pass >> admin)
+    while (file >> id >> name >> pass >> admin >> lang >> theme)
     {
         if (id > maxId)
             maxId = id;
@@ -74,9 +77,40 @@ int RegisterUser(const string& username, const string& password, const bool& isA
     file << id << " "
         << username << " "
         << password << " "
-        << isAdmin << std::endl;
+        << isAdmin  << " "
+        << LangToString(GlobalSettings::CurrentLang) << " "
+        << ThemeToString(GlobalSettings::CurrentTheme) << std::endl;
 
     return id;
+}
+
+void UpdateUserSettings(int user_id) {
+    std::ifstream in(USER_FILE_PATH);
+    std::ofstream out(TEMPU_FILE_PATH);
+
+    int id, isAdmin;
+    string login, pass;
+    string langStr, themeStr;
+
+    while (in >> id >> login >> pass >> isAdmin >> langStr >> themeStr) {
+        if (id == user_id) {
+            langStr = LangToString(GlobalSettings::CurrentLang);
+            themeStr = ThemeToString(GlobalSettings::CurrentTheme);
+        }
+
+        out << id << " "
+            << login << " "
+            << pass << " "
+            << isAdmin << " "
+            << langStr << " "
+            << themeStr << std::endl;
+    }
+
+    in.close();
+    out.close();
+
+    remove(USER_FILE_PATH);
+    rename(TEMPU_FILE_PATH, USER_FILE_PATH);
 }
 
 
@@ -207,7 +241,7 @@ bool load_tree_file(int user_id, BinaryTree* tree) {
 // Удаление
 void delete_tree_file(int id_del) {
     std::ifstream in(TREE_FILE_PATH, std::ios::binary);
-    std::ofstream out(TEMP_FILE_PATH, std::ios::binary);
+    std::ofstream out(TEMPT_FILE_PATH, std::ios::binary);
 
     if (!in || !out) {
         return;
@@ -238,7 +272,7 @@ void delete_tree_file(int id_del) {
     out.close();
 
     remove(TREE_FILE_PATH);
-    rename(TEMP_FILE_PATH, TREE_FILE_PATH);
+    rename(TEMPT_FILE_PATH, TREE_FILE_PATH);
 }
 
 

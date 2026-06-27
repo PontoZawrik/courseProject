@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include "Utils.h"
 #include "BinaryTree.h"
 #include "UserManage.h"
@@ -13,31 +13,38 @@ namespace courseProject {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Сводка для mainForm
+	/// РЎРІРѕРґРєР° РґР»СЏ mainForm
 	/// </summary>
 	public ref class mainForm : public System::Windows::Forms::Form
 	{
 	private:
 		BinaryTree* tree = new BinaryTree();
+		User* currentUser;
 
 	private: System::Windows::Forms::ToolStripMenuItem^ SaveChangesToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ RebuildTreeToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ DeleteTreeToolStripMenuItem;
 
 	private: System::Windows::Forms::ToolStripMenuItem^ LogOutToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ ViewToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ HelpToolStripMenuItem;
 
+	private: System::Windows::Forms::ToolStripMenuItem^ LanguageToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ LangRUToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ LangENToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ LangBYToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ ThemeToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ WhiteToolStripMenuItem;
 
+	private: System::Windows::Forms::ToolStripMenuItem^ BlueToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ PurpleToolStripMenuItem;
 
-
-	private: System::Windows::Forms::ToolStripMenuItem^ видToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ справкаToolStripMenuItem;
-		   User* currentUser;
 	public:
 		mainForm(void)
 		{
 			InitializeComponent();
 			//
-			//TODO: добавьте код конструктора
+			//TODO: РґРѕР±Р°РІСЊС‚Рµ РєРѕРґ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР°
 			//
 			PrintCost->ReadOnly = true;
 			PrintCost->BackColor = SystemColors::Window;
@@ -54,18 +61,20 @@ namespace courseProject {
 
 		mainForm(User* user) {
 			InitializeComponent();
+
 			currentUser = user;
-			this->Text = "Добро пожаловать " + ToSysString(user->username);
+			GlobalSettings::CurrentLang = user->language;
+			GlobalSettings::CurrentTheme = user->theme;
+			ApplySettings();
 
 			load_tree_file(user->id, tree);
 			RebuildTree(tree);
 
 			if (!user->isAdmin) {
-				this->Text += " (Гостевой режим)";
 				DeleteTreeBtn->Visible = false;
 				DeleteNodeBtn->Visible = false;
 
-				groupBox1->Height -= 23;
+				groupBox->Height -= 23;
 				this->RebuildTreeBtn->Location = System::Drawing::Point(
 					this->RebuildTreeBtn->Location.X, 
 					this->RebuildTreeBtn->Location.Y - 25
@@ -75,7 +84,7 @@ namespace courseProject {
 
 	protected:
 		/// <summary>
-		/// Освободить все используемые ресурсы.
+		/// РћСЃРІРѕР±РѕРґРёС‚СЊ РІСЃРµ РёСЃРїРѕР»СЊР·СѓРµРјС‹Рµ СЂРµСЃСѓСЂСЃС‹.
 		/// </summary>
 		~mainForm()
 		{
@@ -84,13 +93,17 @@ namespace courseProject {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::TreeView^ treeView1;
+	private: System::Windows::Forms::TreeView^ TreeView;
+	protected:
+
 	private: System::Windows::Forms::TextBox^ InpName;
 	private: System::Windows::Forms::TextBox^ InpCost;
 	private: System::Windows::Forms::Button^ AddNodeBtn;
 	private: System::Windows::Forms::Button^ CreateTreeBtn;
+	private: System::Windows::Forms::GroupBox^ groupBox;
 
-	private: System::Windows::Forms::GroupBox^ groupBox1;
+
+
 	private: System::Windows::Forms::Button^ DeleteNodeBtn;
 	private: System::Windows::Forms::Button^ CalcSumBtn;
 	private: System::Windows::Forms::Button^ RebuildTreeBtn;
@@ -98,14 +111,15 @@ namespace courseProject {
 
 
 
-
-
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
-	private: System::Windows::Forms::ToolStripMenuItem^ tempToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^ MainToolStripMenuItem;
+
 	private: System::Windows::Forms::Label^ ErrorInfo;
 	private: System::Windows::Forms::TextBox^ PrintCost;
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Label^ NameLabel;
+	private: System::Windows::Forms::Label^ CostLabel;
+
+
 
 
 
@@ -114,58 +128,67 @@ namespace courseProject {
 
 	private:
 		/// <summary>
-		/// Обязательная переменная конструктора.
+		/// РћР±СЏР·Р°С‚РµР»СЊРЅР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР°.
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Требуемый метод для поддержки конструктора — не изменяйте 
-		/// содержимое этого метода с помощью редактора кода.
+		/// РўСЂРµР±СѓРµРјС‹Р№ РјРµС‚РѕРґ РґР»СЏ РїРѕРґРґРµСЂР¶РєРё РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° вЂ” РЅРµ РёР·РјРµРЅСЏР№С‚Рµ 
+		/// СЃРѕРґРµСЂР¶РёРјРѕРµ СЌС‚РѕРіРѕ РјРµС‚РѕРґР° СЃ РїРѕРјРѕС‰СЊСЋ СЂРµРґР°РєС‚РѕСЂР° РєРѕРґР°.
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->treeView1 = (gcnew System::Windows::Forms::TreeView());
+			this->TreeView = (gcnew System::Windows::Forms::TreeView());
 			this->InpName = (gcnew System::Windows::Forms::TextBox());
 			this->InpCost = (gcnew System::Windows::Forms::TextBox());
 			this->AddNodeBtn = (gcnew System::Windows::Forms::Button());
 			this->CreateTreeBtn = (gcnew System::Windows::Forms::Button());
-			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->groupBox = (gcnew System::Windows::Forms::GroupBox());
 			this->DeleteNodeBtn = (gcnew System::Windows::Forms::Button());
 			this->CalcSumBtn = (gcnew System::Windows::Forms::Button());
 			this->RebuildTreeBtn = (gcnew System::Windows::Forms::Button());
 			this->DeleteTreeBtn = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
-			this->tempToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->MainToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->SaveChangesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->RebuildTreeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->DeleteTreeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->LogOutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->видToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->справкаToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ViewToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->LanguageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->LangRUToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->LangENToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->LangBYToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ThemeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->WhiteToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->BlueToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->PurpleToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->HelpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ErrorInfo = (gcnew System::Windows::Forms::Label());
 			this->PrintCost = (gcnew System::Windows::Forms::TextBox());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->groupBox1->SuspendLayout();
+			this->NameLabel = (gcnew System::Windows::Forms::Label());
+			this->CostLabel = (gcnew System::Windows::Forms::Label());
+			this->groupBox->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
-			// treeView1
+			// TreeView
 			// 
-			this->treeView1->Location = System::Drawing::Point(12, 31);
-			this->treeView1->Name = L"treeView1";
-			this->treeView1->Size = System::Drawing::Size(477, 376);
-			this->treeView1->TabIndex = 0;
+			this->TreeView->Location = System::Drawing::Point(12, 31);
+			this->TreeView->Name = L"TreeView";
+			this->TreeView->Size = System::Drawing::Size(477, 376);
+			this->TreeView->TabIndex = 0;
 			// 
 			// InpName
 			// 
+			this->InpName->BackColor = System::Drawing::SystemColors::Window;
 			this->InpName->ForeColor = System::Drawing::Color::Gray;
 			this->InpName->Location = System::Drawing::Point(495, 53);
 			this->InpName->Name = L"InpName";
 			this->InpName->Size = System::Drawing::Size(270, 22);
 			this->InpName->TabIndex = 1;
-			this->InpName->Text = L"Введите название:";
+			this->InpName->Text = L"Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ:";
 			this->InpName->Enter += gcnew System::EventHandler(this, &mainForm::InpName_Enter);
 			this->InpName->Leave += gcnew System::EventHandler(this, &mainForm::InpName_Leave);
 			// 
@@ -176,7 +199,7 @@ namespace courseProject {
 			this->InpCost->Name = L"InpCost";
 			this->InpCost->Size = System::Drawing::Size(270, 22);
 			this->InpCost->TabIndex = 2;
-			this->InpCost->Text = L"Введите стоимость:";
+			this->InpCost->Text = L"Р’РІРµРґРёС‚Рµ СЃС‚РѕРёРјРѕСЃС‚СЊ:";
 			this->InpCost->Enter += gcnew System::EventHandler(this, &mainForm::InpCost_Enter);
 			this->InpCost->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &mainForm::InpCost_KeyPress);
 			this->InpCost->Leave += gcnew System::EventHandler(this, &mainForm::InpCost_Leave);
@@ -187,7 +210,7 @@ namespace courseProject {
 			this->AddNodeBtn->Name = L"AddNodeBtn";
 			this->AddNodeBtn->Size = System::Drawing::Size(132, 25);
 			this->AddNodeBtn->TabIndex = 3;
-			this->AddNodeBtn->Text = L"Создать узел";
+			this->AddNodeBtn->Text = L"Р”РѕР±Р°РІРёС‚СЊ СѓР·РµР»";
 			this->AddNodeBtn->UseVisualStyleBackColor = true;
 			this->AddNodeBtn->Click += gcnew System::EventHandler(this, &mainForm::AddNodeBtn_Click);
 			// 
@@ -197,20 +220,20 @@ namespace courseProject {
 			this->CreateTreeBtn->Name = L"CreateTreeBtn";
 			this->CreateTreeBtn->Size = System::Drawing::Size(132, 25);
 			this->CreateTreeBtn->TabIndex = 4;
-			this->CreateTreeBtn->Text = L"Создать дерево";
+			this->CreateTreeBtn->Text = L"РЎРѕР·РґР°С‚СЊ РґРµСЂРµРІРѕ";
 			this->CreateTreeBtn->UseVisualStyleBackColor = true;
 			this->CreateTreeBtn->Click += gcnew System::EventHandler(this, &mainForm::CreateTreeBtn_Click);
 			// 
-			// groupBox1
+			// groupBox
 			// 
-			this->groupBox1->Controls->Add(this->DeleteNodeBtn);
-			this->groupBox1->Controls->Add(this->CalcSumBtn);
-			this->groupBox1->Location = System::Drawing::Point(496, 217);
-			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(269, 84);
-			this->groupBox1->TabIndex = 5;
-			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Взаимодействия с филиалом";
+			this->groupBox->Controls->Add(this->DeleteNodeBtn);
+			this->groupBox->Controls->Add(this->CalcSumBtn);
+			this->groupBox->Location = System::Drawing::Point(496, 217);
+			this->groupBox->Name = L"groupBox";
+			this->groupBox->Size = System::Drawing::Size(269, 84);
+			this->groupBox->TabIndex = 5;
+			this->groupBox->TabStop = false;
+			this->groupBox->Text = L"Р’Р·Р°РёРјРѕРґРµР№СЃС‚РІРёСЏ СЃ С„РёР»РёР°Р»РѕРј";
 			// 
 			// DeleteNodeBtn
 			// 
@@ -219,7 +242,7 @@ namespace courseProject {
 			this->DeleteNodeBtn->Name = L"DeleteNodeBtn";
 			this->DeleteNodeBtn->Size = System::Drawing::Size(256, 25);
 			this->DeleteNodeBtn->TabIndex = 1;
-			this->DeleteNodeBtn->Text = L"Удалить узел";
+			this->DeleteNodeBtn->Text = L"РЈРґР°Р»РёС‚СЊ СѓР·РµР»";
 			this->DeleteNodeBtn->UseVisualStyleBackColor = true;
 			this->DeleteNodeBtn->Click += gcnew System::EventHandler(this, &mainForm::DeleteNodeBtn_Click);
 			// 
@@ -229,7 +252,7 @@ namespace courseProject {
 			this->CalcSumBtn->Name = L"CalcSumBtn";
 			this->CalcSumBtn->Size = System::Drawing::Size(256, 25);
 			this->CalcSumBtn->TabIndex = 0;
-			this->CalcSumBtn->Text = L"Вычислить стоимость";
+			this->CalcSumBtn->Text = L"Р’С‹С‡РёСЃР»РёС‚СЊ СЃС‚РѕРёРјРѕСЃС‚СЊ";
 			this->CalcSumBtn->UseVisualStyleBackColor = true;
 			this->CalcSumBtn->Click += gcnew System::EventHandler(this, &mainForm::CalcSumBtn_Click);
 			// 
@@ -239,7 +262,7 @@ namespace courseProject {
 			this->RebuildTreeBtn->Name = L"RebuildTreeBtn";
 			this->RebuildTreeBtn->Size = System::Drawing::Size(256, 25);
 			this->RebuildTreeBtn->TabIndex = 6;
-			this->RebuildTreeBtn->Text = L"Перестроить дерево";
+			this->RebuildTreeBtn->Text = L"РџРµСЂРµСЃС‚СЂРѕРёС‚СЊ РґРµСЂРµРІРѕ";
 			this->RebuildTreeBtn->UseVisualStyleBackColor = true;
 			this->RebuildTreeBtn->Click += gcnew System::EventHandler(this, &mainForm::RebuildTreeBtn_Click);
 			// 
@@ -250,7 +273,7 @@ namespace courseProject {
 			this->DeleteTreeBtn->Name = L"DeleteTreeBtn";
 			this->DeleteTreeBtn->Size = System::Drawing::Size(256, 25);
 			this->DeleteTreeBtn->TabIndex = 7;
-			this->DeleteTreeBtn->Text = L"Удалить дерево";
+			this->DeleteTreeBtn->Text = L"РЈРґР°Р»РёС‚СЊ РґРµСЂРµРІРѕ";
 			this->DeleteTreeBtn->UseVisualStyleBackColor = true;
 			this->DeleteTreeBtn->Click += gcnew System::EventHandler(this, &mainForm::DeleteTreeBtn_Click);
 			// 
@@ -258,8 +281,8 @@ namespace courseProject {
 			// 
 			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->tempToolStripMenuItem,
-					this->видToolStripMenuItem, this->справкаToolStripMenuItem
+				this->MainToolStripMenuItem,
+					this->ViewToolStripMenuItem, this->HelpToolStripMenuItem
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
@@ -267,55 +290,118 @@ namespace courseProject {
 			this->menuStrip1->TabIndex = 8;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
-			// tempToolStripMenuItem
+			// MainToolStripMenuItem
 			// 
-			this->tempToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+			this->MainToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
 				this->SaveChangesToolStripMenuItem,
 					this->RebuildTreeToolStripMenuItem, this->DeleteTreeToolStripMenuItem, this->LogOutToolStripMenuItem
 			});
-			this->tempToolStripMenuItem->Name = L"tempToolStripMenuItem";
-			this->tempToolStripMenuItem->Size = System::Drawing::Size(79, 24);
-			this->tempToolStripMenuItem->Text = L"Главная";
+			this->MainToolStripMenuItem->Name = L"MainToolStripMenuItem";
+			this->MainToolStripMenuItem->Size = System::Drawing::Size(79, 24);
+			this->MainToolStripMenuItem->Text = L"Р“Р»Р°РІРЅР°СЏ";
 			// 
 			// SaveChangesToolStripMenuItem
 			// 
 			this->SaveChangesToolStripMenuItem->Name = L"SaveChangesToolStripMenuItem";
 			this->SaveChangesToolStripMenuItem->Size = System::Drawing::Size(248, 26);
-			this->SaveChangesToolStripMenuItem->Text = L"Сохранить изменения";
+			this->SaveChangesToolStripMenuItem->Text = L"РЎРѕС…СЂР°РЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ";
 			this->SaveChangesToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::SaveChangesToolStripMenuItem_Click);
 			// 
 			// RebuildTreeToolStripMenuItem
 			// 
 			this->RebuildTreeToolStripMenuItem->Name = L"RebuildTreeToolStripMenuItem";
 			this->RebuildTreeToolStripMenuItem->Size = System::Drawing::Size(248, 26);
-			this->RebuildTreeToolStripMenuItem->Text = L"Перестроить дерево";
+			this->RebuildTreeToolStripMenuItem->Text = L"РџРµСЂРµСЃС‚СЂРѕРёС‚СЊ РґРµСЂРµРІРѕ";
 			this->RebuildTreeToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::RebuildTreeToolStripMenuItem_Click);
 			// 
 			// DeleteTreeToolStripMenuItem
 			// 
 			this->DeleteTreeToolStripMenuItem->Name = L"DeleteTreeToolStripMenuItem";
 			this->DeleteTreeToolStripMenuItem->Size = System::Drawing::Size(248, 26);
-			this->DeleteTreeToolStripMenuItem->Text = L"Удалить дерево";
+			this->DeleteTreeToolStripMenuItem->Text = L"РЈРґР°Р»РёС‚СЊ РґРµСЂРµРІРѕ";
 			this->DeleteTreeToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::DeleteTreeToolStripMenuItem_Click);
 			// 
 			// LogOutToolStripMenuItem
 			// 
 			this->LogOutToolStripMenuItem->Name = L"LogOutToolStripMenuItem";
 			this->LogOutToolStripMenuItem->Size = System::Drawing::Size(248, 26);
-			this->LogOutToolStripMenuItem->Text = L"Выйти из системы";
+			this->LogOutToolStripMenuItem->Text = L"Р’С‹Р№С‚Рё РёР· СЃРёСЃС‚РµРјС‹";
 			this->LogOutToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::LogOutToolStripMenuItem_Click);
 			// 
-			// видToolStripMenuItem
+			// ViewToolStripMenuItem
 			// 
-			this->видToolStripMenuItem->Name = L"видToolStripMenuItem";
-			this->видToolStripMenuItem->Size = System::Drawing::Size(49, 24);
-			this->видToolStripMenuItem->Text = L"Вид";
+			this->ViewToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->LanguageToolStripMenuItem,
+					this->ThemeToolStripMenuItem
+			});
+			this->ViewToolStripMenuItem->Name = L"ViewToolStripMenuItem";
+			this->ViewToolStripMenuItem->Size = System::Drawing::Size(49, 24);
+			this->ViewToolStripMenuItem->Text = L"Р’РёРґ";
 			// 
-			// справкаToolStripMenuItem
+			// LanguageToolStripMenuItem
 			// 
-			this->справкаToolStripMenuItem->Name = L"справкаToolStripMenuItem";
-			this->справкаToolStripMenuItem->Size = System::Drawing::Size(81, 24);
-			this->справкаToolStripMenuItem->Text = L"Справка";
+			this->LanguageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->LangRUToolStripMenuItem,
+					this->LangENToolStripMenuItem, this->LangBYToolStripMenuItem
+			});
+			this->LanguageToolStripMenuItem->Name = L"LanguageToolStripMenuItem";
+			this->LanguageToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->LanguageToolStripMenuItem->Text = L"РЇР·С‹Рє";
+			// 
+			// LangRUToolStripMenuItem
+			// 
+			this->LangRUToolStripMenuItem->Name = L"LangRUToolStripMenuItem";
+			this->LangRUToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->LangRUToolStripMenuItem->Text = L"Р СѓСЃСЃРєРёР№";
+			this->LangRUToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::LangRUToolStripMenuItem_Click);
+			// 
+			// LangENToolStripMenuItem
+			// 
+			this->LangENToolStripMenuItem->Name = L"LangENToolStripMenuItem";
+			this->LangENToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->LangENToolStripMenuItem->Text = L"РђРЅРіР»РёР№СЃРєРёР№";
+			this->LangENToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::LangENToolStripMenuItem_Click);
+			// 
+			// LangBYToolStripMenuItem
+			// 
+			this->LangBYToolStripMenuItem->Name = L"LangBYToolStripMenuItem";
+			this->LangBYToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->LangBYToolStripMenuItem->Text = L"Р‘РµР»РѕСЂСѓСЃСЃРєРёР№";
+			this->LangBYToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::LangBYToolStripMenuItem_Click);
+			// 
+			// ThemeToolStripMenuItem
+			// 
+			this->ThemeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->WhiteToolStripMenuItem,
+					this->BlueToolStripMenuItem, this->PurpleToolStripMenuItem
+			});
+			this->ThemeToolStripMenuItem->Name = L"ThemeToolStripMenuItem";
+			this->ThemeToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->ThemeToolStripMenuItem->Text = L"РўРµРјР°";
+			// 
+			// WhiteToolStripMenuItem
+			// 
+			this->WhiteToolStripMenuItem->Name = L"WhiteToolStripMenuItem";
+			this->WhiteToolStripMenuItem->Size = System::Drawing::Size(176, 26);
+			this->WhiteToolStripMenuItem->Text = L"Р‘РµР»Р°СЏ";
+			// 
+			// BlueToolStripMenuItem
+			// 
+			this->BlueToolStripMenuItem->Name = L"BlueToolStripMenuItem";
+			this->BlueToolStripMenuItem->Size = System::Drawing::Size(176, 26);
+			this->BlueToolStripMenuItem->Text = L"РЎРёРЅСЏСЏ";
+			// 
+			// PurpleToolStripMenuItem
+			// 
+			this->PurpleToolStripMenuItem->Name = L"PurpleToolStripMenuItem";
+			this->PurpleToolStripMenuItem->Size = System::Drawing::Size(176, 26);
+			this->PurpleToolStripMenuItem->Text = L"Р¤РёРѕР»РµС‚РѕРІР°СЏ";
+			// 
+			// HelpToolStripMenuItem
+			// 
+			this->HelpToolStripMenuItem->Name = L"HelpToolStripMenuItem";
+			this->HelpToolStripMenuItem->Size = System::Drawing::Size(81, 24);
+			this->HelpToolStripMenuItem->Text = L"РЎРїСЂР°РІРєР°";
 			// 
 			// ErrorInfo
 			// 
@@ -333,48 +419,48 @@ namespace courseProject {
 			this->PrintCost->Name = L"PrintCost";
 			this->PrintCost->Size = System::Drawing::Size(270, 22);
 			this->PrintCost->TabIndex = 10;
-			this->PrintCost->Text = L"Cтоимость филиала";
+			this->PrintCost->Text = L"CС‚РѕРёРјРѕСЃС‚СЊ С„РёР»РёР°Р»Р°";
 			// 
-			// label1
+			// NameLabel
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(495, 36);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(76, 16);
-			this->label1->TabIndex = 11;
-			this->label1->Text = L"Название:";
+			this->NameLabel->AutoSize = true;
+			this->NameLabel->Location = System::Drawing::Point(495, 36);
+			this->NameLabel->Name = L"NameLabel";
+			this->NameLabel->Size = System::Drawing::Size(76, 16);
+			this->NameLabel->TabIndex = 11;
+			this->NameLabel->Text = L"РќР°Р·РІР°РЅРёРµ:";
 			// 
-			// label2
+			// CostLabel
 			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(495, 81);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(80, 16);
-			this->label2->TabIndex = 12;
-			this->label2->Text = L"Стоимость:";
+			this->CostLabel->AutoSize = true;
+			this->CostLabel->Location = System::Drawing::Point(495, 81);
+			this->CostLabel->Name = L"CostLabel";
+			this->CostLabel->Size = System::Drawing::Size(80, 16);
+			this->CostLabel->TabIndex = 12;
+			this->CostLabel->Text = L"РЎС‚РѕРёРјРѕСЃС‚СЊ:";
 			// 
 			// mainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(796, 426);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->label1);
+			this->Controls->Add(this->CostLabel);
+			this->Controls->Add(this->NameLabel);
 			this->Controls->Add(this->PrintCost);
 			this->Controls->Add(this->ErrorInfo);
 			this->Controls->Add(this->DeleteTreeBtn);
 			this->Controls->Add(this->RebuildTreeBtn);
-			this->Controls->Add(this->groupBox1);
+			this->Controls->Add(this->groupBox);
 			this->Controls->Add(this->CreateTreeBtn);
 			this->Controls->Add(this->AddNodeBtn);
 			this->Controls->Add(this->InpCost);
 			this->Controls->Add(this->InpName);
-			this->Controls->Add(this->treeView1);
+			this->Controls->Add(this->TreeView);
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"mainForm";
 			this->Text = L"mainForm";
-			this->groupBox1->ResumeLayout(false);
+			this->groupBox->ResumeLayout(false);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
@@ -382,9 +468,9 @@ namespace courseProject {
 
 		}
 #pragma endregion
-// Построение дерева
+// РџРѕСЃС‚СЂРѕРµРЅРёРµ РґРµСЂРµРІР°
 	private: bool RebuildTree(BinaryTree* tree) {
-		treeView1->Nodes->Clear();
+		TreeView->Nodes->Clear();
 		My_TreeNode* root = tree->get_root();
 		if (!root) {
 			return false;
@@ -392,11 +478,11 @@ namespace courseProject {
 
 		TreeNode^ rootNode = gcnew TreeNode(ToSysString(root->data_field.bankName));
 		rootNode->Tag = root->id;
-		treeView1->Nodes->Add(rootNode);
+		TreeView->Nodes->Add(rootNode);
 
 		BuildTree(rootNode, root->left);
 		BuildTree(rootNode, root->right);
-		treeView1->ExpandAll();
+		TreeView->ExpandAll();
 		return true;
 	}
 			
@@ -415,10 +501,15 @@ namespace courseProject {
 
 
 
-// Обработчики
+// РћР±СЂР°Р±РѕС‚С‡РёРєРё
 	private: System::Void AddNodeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-		TreeNode^ selected = treeView1->SelectedNode;
-		if (selected && InpName->Text != "Введите название:" && InpCost->Text != "Введите стоимость:") {
+		ResetInputBox();
+
+		TreeNode^ selected = TreeView->SelectedNode;
+		if (selected 
+			&& InpName->Text != GlobalSettings::GetLang("InpName") 
+			&& InpCost->Text != GlobalSettings::GetLang("InpCost")) 
+		{
 			DataField data;
 			data.bankName = ToStdString(InpName->Text);
 			data.cost = Convert::ToInt32(InpCost->Text);
@@ -426,18 +517,36 @@ namespace courseProject {
 			tree->add_node((size_t)selected->Tag, data);
 			RebuildTree(tree);
 		}
+		else if (!selected) {
+			ErrorInfo->Text = GlobalSettings::GetLang("SelectionError");
+		}
+		else {
+			InpName->ForeColor = (InpName->Text == GlobalSettings::GetLang("InpName") ? Color::Red : InpName->ForeColor);
+			InpCost->ForeColor = (InpCost->Text == GlobalSettings::GetLang("InpCost") ? Color::Red : InpCost->ForeColor);
+			ErrorInfo->Text = GlobalSettings::GetLang("EmptyFieldsError");
+		}
 	}
 
 	private: System::Void DeleteNodeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-		TreeNode^ selected = treeView1->SelectedNode;
+		ResetInputBox();
+
+		TreeNode^ selected = TreeView->SelectedNode;
 		if (selected) {
 			tree->delete_by_id((size_t)selected->Tag);
 			RebuildTree(tree);
 		}
+		else {
+			ErrorInfo->Text = GlobalSettings::GetLang("SelectionError");
+		}
 	}
 
 	private: System::Void CreateTreeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (!tree->get_root() && InpName->Text != "Введите название:" && InpCost->Text != "Введите стоимость:") {
+		ResetInputBox();
+
+		if (!tree->get_root() 
+			&& InpName->Text != GlobalSettings::GetLang("InpName") 
+			&& InpCost->Text != GlobalSettings::GetLang("InpCost")) 
+		{
 			DataField data;
 			data.bankName = ToStdString(InpName->Text);
 			data.cost = Convert::ToInt32(InpCost->Text);
@@ -445,28 +554,44 @@ namespace courseProject {
 			tree->create_tree(data);
 			RebuildTree(tree);
 		}
+		else if (tree->get_root()) {
+			ErrorInfo->Text = GlobalSettings::GetLang("ExistingTreeError");
+		}
+		else {
+			InpName->ForeColor = (InpName->Text == GlobalSettings::GetLang("InpName") ? Color::Red : InpName->ForeColor);
+			InpCost->ForeColor = (InpCost->Text == GlobalSettings::GetLang("InpCost") ? Color::Red : InpCost->ForeColor);
+			ErrorInfo->Text = GlobalSettings::GetLang("EmptyFieldsError");
+		}
 	}
 
 	private: System::Void DeleteTreeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		ResetInputBox();
 		tree->delete_tree();
 		RebuildTree(tree);
 	}
 
 	private: System::Void RebuildTreeBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		ResetInputBox();
 		RebuildTree(tree);
 	}
 
 	private: System::Void CalcSumBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-		TreeNode^ selected = treeView1->SelectedNode;
+		ResetInputBox();
+
+		TreeNode^ selected = TreeView->SelectedNode;
 		if (selected) {
 			PrintCost->ForeColor = Color::Black;
 			PrintCost->Text = Convert::ToString(tree->calc_sum((size_t)selected->Tag));
+		}
+		else {
+			ErrorInfo->Text = GlobalSettings::GetLang("SelectionError");
 		}
 	}
 
 
 
-	// MenuStrip
+// MenuStrip
+	// Р“Р»Р°РІРЅР°СЏ
 	private: System::Void SaveChangesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		update_tree_file(currentUser->id, tree);
 	}
@@ -479,36 +604,54 @@ namespace courseProject {
 	}
 	private: System::Void LogOutToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		update_tree_file(currentUser->id, tree);
+		delete currentUser;
 		this->DialogResult = System::Windows::Forms::DialogResult::Retry;
 		this->Close();
 	}
 
+	// Р’РёРґ - РЇР·С‹Рє
+	private: System::Void LangRUToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		GlobalSettings::CurrentLang = Lang::RU;
+		ApplySettings();
+		UpdateUserSettings(currentUser->id);
+	}
+	private: System::Void LangENToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		GlobalSettings::CurrentLang = Lang::EN;
+		ApplySettings();
+		UpdateUserSettings(currentUser->id);
+	}
+	private: System::Void LangBYToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		GlobalSettings::CurrentLang = Lang::BY;
+		ApplySettings();
+		UpdateUserSettings(currentUser->id);
+	}
 
 
-	// textBox Ввода названия
+
+	// textBox Р’РІРѕРґР° РЅР°Р·РІР°РЅРёСЏ
 	private: System::Void InpName_Enter(System::Object^ sender, System::EventArgs^ e) {
-		if (InpName->Text == "Введите название:") {
+		if (InpName->Text == GlobalSettings::GetLang("InpName")) {
 			InpName->Text = "";
 			InpName->ForeColor = Color::Black;
 		}
 	}
 	private: System::Void InpName_Leave(System::Object^ sender, System::EventArgs^ e) {
 		if (InpName->Text == "") {
-			InpName->Text = "Введите название:";
+			InpName->Text = GlobalSettings::GetLang("InpName");
 			InpName->ForeColor = Color::Gray;
 		}
 	}
 
-	// textBox Ввода стоимости
+	// textBox Р’РІРѕРґР° СЃС‚РѕРёРјРѕСЃС‚Рё
 	private: System::Void InpCost_Enter(System::Object^ sender, System::EventArgs^ e) {
-		if (InpCost->Text == "Введите стоимость:") {
+		if (InpCost->Text == GlobalSettings::GetLang("InpCost")) {
 			InpCost->Text = "";
 			InpCost->ForeColor = Color::Black;
 		}
 	}
 	private: System::Void InpCost_Leave(System::Object^ sender, System::EventArgs^ e) {
 		if (InpCost->Text == "") {
-			InpCost->Text = "Введите стоимость:";
+			InpCost->Text = GlobalSettings::GetLang("InpCost");
 			InpCost->ForeColor = Color::Gray;
 		}
 	}
@@ -516,6 +659,54 @@ namespace courseProject {
 		if (!Char::IsDigit(e->KeyChar) && !Char::IsControl(e->KeyChar) && e->KeyChar != '-') {
 			e->Handled = true;
 		}
+	}
+
+
+	// РЎР±СЂРѕСЃ РїРѕР»РµР№ РІРІРѕРґР° Рё РѕС€РёР±РѕРє
+	void ResetInputBox() {
+		InpName->ForeColor = (InpName->Text == GlobalSettings::GetLang("InpName") ? Color::Gray : Color::Black);
+		InpCost->ForeColor = (InpCost->Text == GlobalSettings::GetLang("InpCost") ? Color::Gray : Color::Black);
+		ErrorInfo->Text = "";
+	}
+
+	// Р¤СѓРЅРєС†РёСЏ Р»РѕРєР°Р»РёР·Р°С†РёРё mainForm
+	void ApplySettings() {
+		// РЎРѕР·РґР°РЅРёРµ РЈР·Р»РѕРІ
+		NameLabel->Text = GlobalSettings::GetLang("NameLabel");
+		InpName->Text = (InpName->Text != "" ? GlobalSettings::GetLang("InpName") : "");
+		CostLabel->Text = GlobalSettings::GetLang("CostLabel");
+		InpCost->Text = (InpCost->Text != "" ? GlobalSettings::GetLang("InpCost") : "");
+		AddNodeBtn->Text = GlobalSettings::GetLang("AddNodeBtn");
+		CreateTreeBtn->Text = GlobalSettings::GetLang("CreateTreeBtn");
+
+		// Р’Р·Р°РёРјРѕРґРµР№СЃС‚РІРёСЏ СЃ РґРµСЂРµРІРѕРј
+		PrintCost->Text = GlobalSettings::GetLang("PrintCost");
+		groupBox->Text = GlobalSettings::GetLang("groupBox");
+		CalcSumBtn->Text = GlobalSettings::GetLang("CalcSumBtn");
+		DeleteNodeBtn->Text = GlobalSettings::GetLang("DeleteNodeBtn");
+		RebuildTreeBtn->Text = GlobalSettings::GetLang("RebuildTreeBtn");
+		DeleteTreeBtn->Text = GlobalSettings::GetLang("DeleteTreeBtn");
+
+		// РњРµРЅСЋ РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёР№ 
+		MainToolStripMenuItem->Text = GlobalSettings::GetLang("MainMenuItem");
+		SaveChangesToolStripMenuItem->Text = GlobalSettings::GetLang("SaveChangesMenuItem");
+		RebuildTreeToolStripMenuItem->Text = GlobalSettings::GetLang("RebuildTreeMenuItem");
+		DeleteTreeToolStripMenuItem->Text = GlobalSettings::GetLang("DeleteTreeMenuItem");
+		LogOutToolStripMenuItem->Text = GlobalSettings::GetLang("LogOutMenuItem");
+		ViewToolStripMenuItem->Text = GlobalSettings::GetLang("ViewMenuItem");
+		LanguageToolStripMenuItem->Text = GlobalSettings::GetLang("LanguageMenuItem");
+		LangRUToolStripMenuItem->Text = GlobalSettings::GetLang("LangRUMenuItem");
+		LangENToolStripMenuItem->Text = GlobalSettings::GetLang("LangENMenuItem");
+		LangBYToolStripMenuItem->Text = GlobalSettings::GetLang("LangBYMenuItem");
+		ThemeToolStripMenuItem->Text = GlobalSettings::GetLang("ThemeMenuItem");
+		WhiteToolStripMenuItem->Text = GlobalSettings::GetLang("WhiteMenuItem");
+		BlueToolStripMenuItem->Text = GlobalSettings::GetLang("BlueMenuItem");
+		PurpleToolStripMenuItem->Text = GlobalSettings::GetLang("PurpleMenuItem");
+		HelpToolStripMenuItem->Text = GlobalSettings::GetLang("HelpMenuItem");
+
+		// Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ
+		this->Text = GlobalSettings::GetLang("WelcomeStr") + ToSysString(currentUser->username);
+		this->Text += (currentUser->isAdmin ? "" : GlobalSettings::GetLang("SelectedMode"));
 	}
 
 };

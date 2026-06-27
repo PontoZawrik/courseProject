@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include "UserManage.h"
 #include "Utils.h"
 
@@ -12,7 +12,7 @@ namespace courseProject {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Сводка для LoginForm
+	/// РЎРІРѕРґРєР° РґР»СЏ LoginForm
 	/// </summary>
 	public ref class LoginForm : public System::Windows::Forms::Form
 	{
@@ -22,7 +22,7 @@ namespace courseProject {
 		{
 			InitializeComponent();
 			//
-			//TODO: добавьте код конструктора
+			//TODO: РґРѕР±Р°РІСЊС‚Рµ РєРѕРґ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР°
 			//
 
 			PasswordConfLabel->Visible = false;
@@ -30,11 +30,13 @@ namespace courseProject {
 			IsAdminBox->Visible = false;
 			RegistrationBtn->Visible = false;
 			BackToLogBtn->Visible = false;
+
+			ApplySettings();
 		}
 
 	protected:
 		/// <summary>
-		/// Освободить все используемые ресурсы.
+		/// РћСЃРІРѕР±РѕРґРёС‚СЊ РІСЃРµ РёСЃРїРѕР»СЊР·СѓРµРјС‹Рµ СЂРµСЃСѓСЂСЃС‹.
 		/// </summary>
 		~LoginForm()
 		{
@@ -67,6 +69,21 @@ namespace courseProject {
 
 
 	private: System::Windows::Forms::Button^ RegistrationBtn;
+	private: System::Windows::Forms::MenuStrip^ menuStrip1;
+	private: System::Windows::Forms::ToolStripMenuItem^ ViewToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ LanguageToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ ThemeToolStripMenuItem;
+
+
+	private: System::Windows::Forms::ToolStripMenuItem^ LangRUToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ LangENToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ LangBYToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ WhiteToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ BlueToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ PurpleToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ HelpToolStripMenuItem;
+
+
 
 
 
@@ -74,14 +91,14 @@ namespace courseProject {
 
 	private:
 		/// <summary>
-		/// Обязательная переменная конструктора.
+		/// РћР±СЏР·Р°С‚РµР»СЊРЅР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР°.
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Требуемый метод для поддержки конструктора — не изменяйте 
-		/// содержимое этого метода с помощью редактора кода.
+		/// РўСЂРµР±СѓРµРјС‹Р№ РјРµС‚РѕРґ РґР»СЏ РїРѕРґРґРµСЂР¶РєРё РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° вЂ” РЅРµ РёР·РјРµРЅСЏР№С‚Рµ 
+		/// СЃРѕРґРµСЂР¶РёРјРѕРµ СЌС‚РѕРіРѕ РјРµС‚РѕРґР° СЃ РїРѕРјРѕС‰СЊСЋ СЂРµРґР°РєС‚РѕСЂР° РєРѕРґР°.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -97,6 +114,18 @@ namespace courseProject {
 			this->IsAdminBox = (gcnew System::Windows::Forms::CheckBox());
 			this->BackToLogBtn = (gcnew System::Windows::Forms::Button());
 			this->RegistrationBtn = (gcnew System::Windows::Forms::Button());
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->ViewToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->LanguageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->LangRUToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->LangENToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->LangBYToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ThemeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->WhiteToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->BlueToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->PurpleToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->HelpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// Header
@@ -108,14 +137,19 @@ namespace courseProject {
 			this->Header->Name = L"Header";
 			this->Header->Size = System::Drawing::Size(261, 39);
 			this->Header->TabIndex = 0;
-			this->Header->Text = L"Вход в систему";
+			this->Header->Text = L"Р’С…РѕРґ РІ СЃРёСЃС‚РµРјСѓ";
 			// 
 			// UsernameInp
 			// 
+			this->UsernameInp->ForeColor = System::Drawing::Color::Gray;
 			this->UsernameInp->Location = System::Drawing::Point(114, 163);
 			this->UsernameInp->Name = L"UsernameInp";
 			this->UsernameInp->Size = System::Drawing::Size(284, 22);
 			this->UsernameInp->TabIndex = 1;
+			this->UsernameInp->Text = L"Р’РІРµРґРёС‚Рµ РёРјСЏ:";
+			this->UsernameInp->Enter += gcnew System::EventHandler(this, &LoginForm::UsernameInp_Enter);
+			this->UsernameInp->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &LoginForm::UsernameInp_KeyPress);
+			this->UsernameInp->Leave += gcnew System::EventHandler(this, &LoginForm::UsernameInp_Leave);
 			// 
 			// UsernameLabel
 			// 
@@ -124,7 +158,7 @@ namespace courseProject {
 			this->UsernameLabel->Name = L"UsernameLabel";
 			this->UsernameLabel->Size = System::Drawing::Size(132, 16);
 			this->UsernameLabel->TabIndex = 3;
-			this->UsernameLabel->Text = L"Имя пользователя:";
+			this->UsernameLabel->Text = L"РРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ:";
 			// 
 			// PasswordLabel
 			// 
@@ -133,14 +167,19 @@ namespace courseProject {
 			this->PasswordLabel->Name = L"PasswordLabel";
 			this->PasswordLabel->Size = System::Drawing::Size(59, 16);
 			this->PasswordLabel->TabIndex = 5;
-			this->PasswordLabel->Text = L"Пароль:";
+			this->PasswordLabel->Text = L"РџР°СЂРѕР»СЊ:";
 			// 
 			// PasswordInp
 			// 
+			this->PasswordInp->ForeColor = System::Drawing::Color::Gray;
 			this->PasswordInp->Location = System::Drawing::Point(114, 210);
 			this->PasswordInp->Name = L"PasswordInp";
 			this->PasswordInp->Size = System::Drawing::Size(284, 22);
 			this->PasswordInp->TabIndex = 4;
+			this->PasswordInp->Text = L"Р’РІРµРґРёС‚Рµ РїР°СЂРѕР»СЊ:";
+			this->PasswordInp->Enter += gcnew System::EventHandler(this, &LoginForm::PasswordInp_Enter);
+			this->PasswordInp->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &LoginForm::PasswordInp_KeyPress);
+			this->PasswordInp->Leave += gcnew System::EventHandler(this, &LoginForm::PasswordInp_Leave);
 			// 
 			// LogInBtn
 			// 
@@ -148,7 +187,7 @@ namespace courseProject {
 			this->LogInBtn->Name = L"LogInBtn";
 			this->LogInBtn->Size = System::Drawing::Size(283, 30);
 			this->LogInBtn->TabIndex = 6;
-			this->LogInBtn->Text = L"Вход";
+			this->LogInBtn->Text = L"Р’С…РѕРґ";
 			this->LogInBtn->UseVisualStyleBackColor = true;
 			this->LogInBtn->Click += gcnew System::EventHandler(this, &LoginForm::LogInBtn_Click);
 			// 
@@ -158,7 +197,7 @@ namespace courseProject {
 			this->ToRegisterBtn->Name = L"ToRegisterBtn";
 			this->ToRegisterBtn->Size = System::Drawing::Size(283, 30);
 			this->ToRegisterBtn->TabIndex = 7;
-			this->ToRegisterBtn->Text = L"Зарегистрироваться";
+			this->ToRegisterBtn->Text = L"Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊСЃСЏ";
 			this->ToRegisterBtn->UseVisualStyleBackColor = true;
 			this->ToRegisterBtn->Click += gcnew System::EventHandler(this, &LoginForm::ToRegisterBtn_Click);
 			// 
@@ -169,14 +208,19 @@ namespace courseProject {
 			this->PasswordConfLabel->Name = L"PasswordConfLabel";
 			this->PasswordConfLabel->Size = System::Drawing::Size(147, 16);
 			this->PasswordConfLabel->TabIndex = 9;
-			this->PasswordConfLabel->Text = L"Подтвердить пароль:";
+			this->PasswordConfLabel->Text = L"РџРѕРґС‚РІРµСЂРґРёС‚СЊ РїР°СЂРѕР»СЊ:";
 			// 
 			// PasswordConfInp
 			// 
+			this->PasswordConfInp->ForeColor = System::Drawing::Color::Gray;
 			this->PasswordConfInp->Location = System::Drawing::Point(115, 255);
 			this->PasswordConfInp->Name = L"PasswordConfInp";
 			this->PasswordConfInp->Size = System::Drawing::Size(284, 22);
 			this->PasswordConfInp->TabIndex = 8;
+			this->PasswordConfInp->Text = L"РџРѕРґС‚РІРµСЂРґРёС‚Рµ РїР°СЂРѕР»СЊ:";
+			this->PasswordConfInp->Enter += gcnew System::EventHandler(this, &LoginForm::PasswordConfInp_Enter);
+			this->PasswordConfInp->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &LoginForm::PasswordConfInp_KeyPress);
+			this->PasswordConfInp->Leave += gcnew System::EventHandler(this, &LoginForm::PasswordConfInp_Leave);
 			// 
 			// IsAdminBox
 			// 
@@ -185,7 +229,7 @@ namespace courseProject {
 			this->IsAdminBox->Name = L"IsAdminBox";
 			this->IsAdminBox->Size = System::Drawing::Size(78, 20);
 			this->IsAdminBox->TabIndex = 10;
-			this->IsAdminBox->Text = L"Админ\?";
+			this->IsAdminBox->Text = L"РђРґРјРёРЅ\?";
 			this->IsAdminBox->UseVisualStyleBackColor = true;
 			// 
 			// BackToLogBtn
@@ -194,7 +238,7 @@ namespace courseProject {
 			this->BackToLogBtn->Name = L"BackToLogBtn";
 			this->BackToLogBtn->Size = System::Drawing::Size(283, 30);
 			this->BackToLogBtn->TabIndex = 12;
-			this->BackToLogBtn->Text = L"Назад";
+			this->BackToLogBtn->Text = L"РќР°Р·Р°Рґ";
 			this->BackToLogBtn->UseVisualStyleBackColor = true;
 			this->BackToLogBtn->Click += gcnew System::EventHandler(this, &LoginForm::BackToLogBtn_Click);
 			// 
@@ -204,9 +248,100 @@ namespace courseProject {
 			this->RegistrationBtn->Name = L"RegistrationBtn";
 			this->RegistrationBtn->Size = System::Drawing::Size(283, 30);
 			this->RegistrationBtn->TabIndex = 11;
-			this->RegistrationBtn->Text = L"Создать аккаунт";
+			this->RegistrationBtn->Text = L"РЎРѕР·РґР°С‚СЊ Р°РєРєР°СѓРЅС‚";
 			this->RegistrationBtn->UseVisualStyleBackColor = true;
 			this->RegistrationBtn->Click += gcnew System::EventHandler(this, &LoginForm::RegistrationBtn_Click);
+			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->ViewToolStripMenuItem,
+					this->HelpToolStripMenuItem
+			});
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(515, 28);
+			this->menuStrip1->TabIndex = 13;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// ViewToolStripMenuItem
+			// 
+			this->ViewToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->LanguageToolStripMenuItem,
+					this->ThemeToolStripMenuItem
+			});
+			this->ViewToolStripMenuItem->Name = L"ViewToolStripMenuItem";
+			this->ViewToolStripMenuItem->Size = System::Drawing::Size(49, 24);
+			this->ViewToolStripMenuItem->Text = L"Р’РёРґ";
+			// 
+			// LanguageToolStripMenuItem
+			// 
+			this->LanguageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->LangRUToolStripMenuItem,
+					this->LangENToolStripMenuItem, this->LangBYToolStripMenuItem
+			});
+			this->LanguageToolStripMenuItem->Name = L"LanguageToolStripMenuItem";
+			this->LanguageToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->LanguageToolStripMenuItem->Text = L"РЇР·С‹Рє";
+			// 
+			// LangRUToolStripMenuItem
+			// 
+			this->LangRUToolStripMenuItem->Name = L"LangRUToolStripMenuItem";
+			this->LangRUToolStripMenuItem->Size = System::Drawing::Size(181, 26);
+			this->LangRUToolStripMenuItem->Text = L"Р СѓСЃСЃРєРёР№";
+			this->LangRUToolStripMenuItem->Click += gcnew System::EventHandler(this, &LoginForm::LangRUToolStripMenuItem_Click);
+			// 
+			// LangENToolStripMenuItem
+			// 
+			this->LangENToolStripMenuItem->Name = L"LangENToolStripMenuItem";
+			this->LangENToolStripMenuItem->Size = System::Drawing::Size(181, 26);
+			this->LangENToolStripMenuItem->Text = L"РђРЅРіР»РёР№СЃРєРёР№";
+			this->LangENToolStripMenuItem->Click += gcnew System::EventHandler(this, &LoginForm::LangENToolStripMenuItem_Click);
+			// 
+			// LangBYToolStripMenuItem
+			// 
+			this->LangBYToolStripMenuItem->Name = L"LangBYToolStripMenuItem";
+			this->LangBYToolStripMenuItem->Size = System::Drawing::Size(181, 26);
+			this->LangBYToolStripMenuItem->Text = L"Р‘РµР»РѕСЂСѓСЃСЃРєРёР№";
+			this->LangBYToolStripMenuItem->Click += gcnew System::EventHandler(this, &LoginForm::LangBYToolStripMenuItem_Click);
+			// 
+			// ThemeToolStripMenuItem
+			// 
+			this->ThemeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->WhiteToolStripMenuItem,
+					this->BlueToolStripMenuItem, this->PurpleToolStripMenuItem
+			});
+			this->ThemeToolStripMenuItem->Name = L"ThemeToolStripMenuItem";
+			this->ThemeToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->ThemeToolStripMenuItem->Text = L"РўРµРјР°";
+			// 
+			// WhiteToolStripMenuItem
+			// 
+			this->WhiteToolStripMenuItem->Name = L"WhiteToolStripMenuItem";
+			this->WhiteToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->WhiteToolStripMenuItem->Text = L"Р‘РµР»Р°СЏ";
+			this->WhiteToolStripMenuItem->Click += gcnew System::EventHandler(this, &LoginForm::WhiteToolStripMenuItem_Click);
+			// 
+			// BlueToolStripMenuItem
+			// 
+			this->BlueToolStripMenuItem->Name = L"BlueToolStripMenuItem";
+			this->BlueToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->BlueToolStripMenuItem->Text = L"РЎРёРЅСЏСЏ";
+			this->BlueToolStripMenuItem->Click += gcnew System::EventHandler(this, &LoginForm::BlueToolStripMenuItem_Click);
+			// 
+			// PurpleToolStripMenuItem
+			// 
+			this->PurpleToolStripMenuItem->Name = L"PurpleToolStripMenuItem";
+			this->PurpleToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->PurpleToolStripMenuItem->Text = L"Р¤РёРѕР»РµС‚РѕРІР°СЏ";
+			this->PurpleToolStripMenuItem->Click += gcnew System::EventHandler(this, &LoginForm::PurpleToolStripMenuItem_Click);
+			// 
+			// HelpToolStripMenuItem
+			// 
+			this->HelpToolStripMenuItem->Name = L"HelpToolStripMenuItem";
+			this->HelpToolStripMenuItem->Size = System::Drawing::Size(81, 24);
+			this->HelpToolStripMenuItem->Text = L"РЎРїСЂР°РІРєР°";
 			// 
 			// LoginForm
 			// 
@@ -225,8 +360,12 @@ namespace courseProject {
 			this->Controls->Add(this->UsernameLabel);
 			this->Controls->Add(this->UsernameInp);
 			this->Controls->Add(this->Header);
+			this->Controls->Add(this->menuStrip1);
+			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"LoginForm";
 			this->Text = L"LoginForm";
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -261,8 +400,36 @@ namespace courseProject {
 	}
 
 
+	// РЎРјРµРЅР° СЏР·С‹РєР°
+	private: System::Void LangRUToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		GlobalSettings::CurrentLang = Lang::RU;
+		ApplySettings();
+	}
+	private: System::Void LangENToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		GlobalSettings::CurrentLang = Lang::EN;
+		ApplySettings();
+	}
+	private: System::Void LangBYToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		GlobalSettings::CurrentLang = Lang::BY;
+		ApplySettings();
+	}
 
-	// Переключение форм
+	// РЎРјРµРЅР° С‚РµРјС‹
+	private: System::Void WhiteToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		GlobalSettings::CurrentTheme = Theme::White;
+		//this->BackColor = GlobalSettings::GetThemeT();
+	}
+	private: System::Void BlueToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		GlobalSettings::CurrentTheme = Theme::Blue;
+		//this->BackColor = GlobalSettings::GetThemeT();
+	}
+	private: System::Void PurpleToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		GlobalSettings::CurrentTheme = Theme::Purple;
+		//this->BackColor = GlobalSettings::GetThemeT();
+	}
+
+
+	// РџРµСЂРµРєР»СЋС‡РµРЅРёРµ С„РѕСЂРј
 	private: System::Void ToRegisterBtn_Click(System::Object^ sender, System::EventArgs^ e) {
 		PasswordConfLabel->Visible = true;
 		PasswordConfInp->Visible = true;
@@ -273,7 +440,7 @@ namespace courseProject {
 		LogInBtn->Visible = false;
 		ToRegisterBtn->Visible = false;
 
-		Header->Text = "Регистрация";
+		Header->Text = GlobalSettings::GetLang("RegistrationHeader");
 	}
 
 	private: System::Void BackToLogBtn_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -286,7 +453,97 @@ namespace courseProject {
 		LogInBtn->Visible = true;
 		ToRegisterBtn->Visible = true;
 
-		Header->Text = "Вход в систему";
+		Header->Text = GlobalSettings::GetLang("LogInHeader");
+	}
+
+
+	// РќР°СЃС‚СЂРѕР№РєР° РїРѕР»РµР№ РґР»СЏ РІРІРѕРґР°
+	private: System::Void UsernameInp_Enter(System::Object^ sender, System::EventArgs^ e) {
+		if (UsernameInp->Text == GlobalSettings::GetLang("UsernameInp")) {
+			UsernameInp->Text = "";
+			UsernameInp->ForeColor = Color::Black;
+		}
+	}
+	private: System::Void UsernameInp_Leave(System::Object^ sender, System::EventArgs^ e) {
+		if (UsernameInp->Text == "") {
+			UsernameInp->Text = GlobalSettings::GetLang("UsernameInp");
+			UsernameInp->ForeColor = Color::Gray;
+		}
+	}
+	private: System::Void UsernameInp_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		if (e->KeyChar == ' ') {
+			e->Handled = true;
+		}
+	}
+
+	private: System::Void PasswordInp_Enter(System::Object^ sender, System::EventArgs^ e) {
+		if (PasswordInp->Text == GlobalSettings::GetLang("PasswordInp")) {
+			PasswordInp->Text = "";
+			PasswordInp->ForeColor = Color::Black;
+		}
+	}
+	private: System::Void PasswordInp_Leave(System::Object^ sender, System::EventArgs^ e) {
+		if (PasswordInp->Text == "") {
+			PasswordInp->Text = GlobalSettings::GetLang("PasswordInp");
+			PasswordInp->ForeColor = Color::Gray;
+		}
+	}
+	private: System::Void PasswordInp_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		if (e->KeyChar == ' ') {
+			e->Handled = true;
+		}
+	}
+
+	private: System::Void PasswordConfInp_Enter(System::Object^ sender, System::EventArgs^ e) {
+		if (PasswordConfInp->Text == GlobalSettings::GetLang("PasswordConfInp")) {
+			PasswordConfInp->Text = "";
+			PasswordConfInp->ForeColor = Color::Black;
+		}
+	}
+	private: System::Void PasswordConfInp_Leave(System::Object^ sender, System::EventArgs^ e) {
+		if (PasswordConfInp->Text == "") {
+			PasswordConfInp->Text = GlobalSettings::GetLang("PasswordConfInp");
+			PasswordConfInp->ForeColor = Color::Gray;
+		}
+	}
+	private: System::Void PasswordConfInp_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		if (e->KeyChar == ' ') {
+			e->Handled = true;
+		}
+	}
+
+
+
+	void ApplySettings() {
+		//this->BackColor = GlobalSettings::GetTheme();
+
+		// Р—Р°РіРѕР»РѕРІРѕРє
+		Header->Text = (PasswordConfInp->Visible ? GlobalSettings::GetLang("RegistrationHeader") : GlobalSettings::GetLang("LogInHeader"));
+
+		// Р¤РѕСЂРјР° РІС…РѕРґР°/СЂРµРіРёСЃС‚СЂР°С†РёРё
+		UsernameLabel->Text = GlobalSettings::GetLang("UsernameLabel");
+		UsernameInp->Text = (UsernameInp->Text != "" ? GlobalSettings::GetLang("UsernameInp") : "");
+		PasswordLabel->Text = GlobalSettings::GetLang("PasswordLabel");
+		PasswordInp->Text = (PasswordInp->Text != "" ? GlobalSettings::GetLang("PasswordInp") : "");
+		PasswordConfLabel->Text = GlobalSettings::GetLang("PasswordConfLabel");
+		PasswordConfInp->Text = (PasswordConfInp->Text != "" ? GlobalSettings::GetLang("PasswordConfInp") : "");
+		LogInBtn->Text = GlobalSettings::GetLang("LogInBtn");
+		ToRegisterBtn->Text = GlobalSettings::GetLang("ToRegisterBtn");
+		IsAdminBox->Text = GlobalSettings::GetLang("IsAdminBox");
+		RegistrationBtn->Text = GlobalSettings::GetLang("RegistrationBtn");
+		BackToLogBtn->Text = GlobalSettings::GetLang("BackToLogBtn");
+
+		// РњРµРЅСЋ РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёР№ 
+		ViewToolStripMenuItem->Text = GlobalSettings::GetLang("ViewMenuItem");
+		LanguageToolStripMenuItem->Text = GlobalSettings::GetLang("LanguageMenuItem");
+		LangRUToolStripMenuItem->Text = GlobalSettings::GetLang("LangRUMenuItem");
+		LangENToolStripMenuItem->Text = GlobalSettings::GetLang("LangENMenuItem");
+		LangBYToolStripMenuItem->Text = GlobalSettings::GetLang("LangBYMenuItem");
+		ThemeToolStripMenuItem->Text = GlobalSettings::GetLang("ThemeMenuItem");
+		WhiteToolStripMenuItem->Text = GlobalSettings::GetLang("WhiteMenuItem");
+		BlueToolStripMenuItem->Text = GlobalSettings::GetLang("BlueMenuItem");
+		PurpleToolStripMenuItem->Text = GlobalSettings::GetLang("PurpleMenuItem");
+		HelpToolStripMenuItem->Text = GlobalSettings::GetLang("HelpMenuItem");
 	}
 };
 }
