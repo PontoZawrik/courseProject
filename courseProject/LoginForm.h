@@ -265,7 +265,7 @@ namespace courseProject {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(515, 30);
+			this->menuStrip1->Size = System::Drawing::Size(515, 28);
 			this->menuStrip1->TabIndex = 13;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -344,8 +344,9 @@ namespace courseProject {
 			// HelpToolStripMenuItem
 			// 
 			this->HelpToolStripMenuItem->Name = L"HelpToolStripMenuItem";
-			this->HelpToolStripMenuItem->Size = System::Drawing::Size(81, 26);
+			this->HelpToolStripMenuItem->Size = System::Drawing::Size(81, 24);
 			this->HelpToolStripMenuItem->Text = L"Справка";
+			this->HelpToolStripMenuItem->Click += gcnew System::EventHandler(this, &LoginForm::HelpToolStripMenuItem_Click);
 			// 
 			// ErrorInfo
 			// 
@@ -472,6 +473,16 @@ namespace courseProject {
 	private: System::Void PurpleToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		GlobalSettings::CurrentTheme = Theme::Purple;
 		this->BackColor = GlobalSettings::GetTheme();
+	}
+
+	// Справка
+	private: System::Void HelpToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		MessageBox::Show(
+			GlobalSettings::GetLang("HelpText"),
+			GlobalSettings::GetLang("HelpTitle"),
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Information
+		);
 	}
 
 

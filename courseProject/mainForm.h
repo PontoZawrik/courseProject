@@ -406,6 +406,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ MainToolStripMenuItem;
 			this->HelpToolStripMenuItem->Name = L"HelpToolStripMenuItem";
 			this->HelpToolStripMenuItem->Size = System::Drawing::Size(81, 24);
 			this->HelpToolStripMenuItem->Text = L"Справка";
+			this->HelpToolStripMenuItem->Click += gcnew System::EventHandler(this, &mainForm::HelpToolStripMenuItem_Click);
 			// 
 			// ErrorInfo
 			// 
@@ -645,6 +646,16 @@ private: System::Windows::Forms::ToolStripMenuItem^ MainToolStripMenuItem;
 		GlobalSettings::CurrentTheme = Theme::Purple;
 		this->BackColor = GlobalSettings::GetTheme();
 		UpdateUserSettings(currentUser->id);
+	}
+
+	// Справка
+	private: System::Void HelpToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		MessageBox::Show(
+			GlobalSettings::GetLang("HelpText"),
+			GlobalSettings::GetLang("HelpTitle"),
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Information
+		);
 	}
 		   
 

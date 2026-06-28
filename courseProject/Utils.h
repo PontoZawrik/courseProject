@@ -167,6 +167,36 @@ private:
         dict->Add("RegistrationBtn", "Создать аккаунт");
         dict->Add("BackToLogBtn", "Назад");
 
+        dict->Add("HelpTitle", "Справка");
+        dict->Add("HelpText", "ИНСТРУКЦИЯ ПОЛЬЗОВАТЕЛЯ\n\n"
+
+            "1. Вход в систему\n"
+            "Введите логин и пароль для входа. При отсутствии аккаунта выполните регистрацию.\n\n"
+
+            "2. Работа с деревом\n"
+            "- Для создания нового дерева нажмите кнопку \"Создать дерево\".\n"
+            "- Для добавления узла введите название и стоимость и нажмите \"Добавить узел\".\n"
+            "- Выберите узел в TreeView для дальнейших действий.\n\n"
+
+            "3. Управление узлами\n"
+            "- \"Удалить узел\" удаляет выбранный узел.\n"
+            "- \"Перестроить дерево\" упорядочивает структуру дерева.\n\n"
+
+            "4. Вычисления\n"
+            "- \"Вычислить стоимость\" позволяет определить суммарную стоимость всех филиалов.\n\n"
+
+            "5. Работа с файлом\n"
+            "Данные автоматически сохраняются за пользователем и загружаются при входе.\n\n"
+
+            "6. Режимы пользователей\n"
+            "- Обычный пользователь работает только со своим деревом.\n"
+            "- Администратор имеет доступ к дополнительным функциям.\n\n"
+
+            "7. Настройки\n"
+            "Вы можете изменить язык интерфейса и тему оформления.\n"
+            "Настройки сохраняются индивидуально для каждого пользователя.\n"
+            );
+
 
         return dict;
     }
@@ -230,6 +260,37 @@ private:
         dict->Add("RegistrationBtn", "Create account");
         dict->Add("BackToLogBtn", "Back");
 
+        dict->Add("HelpTitle", "Help");
+        dict->Add("HelpText", "USER GUIDE\n\n"
+
+            "1. Login\n"
+            "Enter your login and password. If you don't have an account, register first.\n\n"
+
+            "2. Working with the tree\n"
+            "- Click \"Create tree\" to create a new tree.\n"
+            "- Enter name and cost, then click \"Add node\".\n"
+            "- Select a node in TreeView to perform actions.\n\n"
+
+            "3. Node management\n"
+            "- \"Delete node\" removes the selected node.\n"
+            "- \"Rebuild tree\" reorganizes the tree structure.\n\n"
+
+            "4. Calculations\n"
+            "- \"Calculate cost\" sums up all branch costs.\n\n"
+
+            "5. Data storage\n"
+            "Data is automatically saved and loaded for each user.\n\n"
+
+            "6. User roles\n"
+            "- Regular user works only with own tree.\n"
+            "- Administrator has extended permissions.\n\n"
+
+            "7. Settings\n"
+            "You can change language and theme.\n"
+            "Settings are saved individually for each user.\n"
+            );
+
+
         return dict;
     }
 
@@ -291,6 +352,37 @@ private:
         dict->Add("IsAdminBox", "Адміністратар?");
         dict->Add("RegistrationBtn", "Стварыць акаўнт");
         dict->Add("BackToLogBtn", "Назад");
+
+        dict->Add("HelpTitle", "Даведка");
+        dict->Add("HelpText", "ІНСТРУКЦЫЯ КАРЫСТАЛЬНІКА\n\n"
+
+            "1. Уваход у сістэму\n"
+            "Увядзіце лагін і пароль. Калі ў вас няма акаўнта — зарэгіструйцеся.\n\n"
+
+            "2. Праца з дрэвам\n"
+            "- Націсніце \"Стварыць дрэва\" для стварэння.\n"
+            "- Увядзіце назву і кошт, затым \"Дадаць вузел\".\n"
+            "- Выбірайце вузел у TreeView для дзеянняў.\n\n"
+
+            "3. Кіраванне вузламі\n"
+            "- \"Выдаліць вузел\" — выдаляе вузел.\n"
+            "- \"Перабудаваць дрэва\" — упарадкоўвае структуру.\n\n"
+
+            "4. Разлікі\n"
+            "- \"Вылiчыць кошт\" — агульная сума.\n\n"
+
+            "5. Захаванне\n"
+            "Даныя захоўваюцца аўтаматычна для карыстальніка.\n\n"
+
+            "6. Рэжымы\n"
+            "- Карыстальнік працуе толькі са сваім дрэвам.\n"
+            "- Адміністратар мае дадатковыя магчымасці.\n\n"
+
+            "7. Налады\n"
+            "Можна змяніць мову і тэму.\n"
+            "Налады захоўваюцца асобна.\n"
+            );
+
 
         return dict;
     }
