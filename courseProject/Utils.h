@@ -147,6 +147,7 @@ private:
         dict->Add("PassDiffError", "Пароли должны совпадать.");
         dict->Add("ExistingUserError", "Данный пользователь уже существует.");
         dict->Add("LogInError", "Ошибка входа.");
+        dict->Add("IncorDataError", "Неверное имя или пароль.");
 
         dict->Add("WelcomeStr", "Добро пожаловать ");
         dict->Add("SelectedMode", " (Гостевой режим)");
@@ -240,6 +241,7 @@ private:
         dict->Add("PassDiffError", "Passwords must match.");
         dict->Add("ExistingUserError", "This user already exists.");
         dict->Add("LogInError", "Login error.");
+        dict->Add("IncorDataError", "Incorrect username or password.");
 
         dict->Add("WelcomeStr", "Welcome ");
         dict->Add("SelectedMode", " (Guest mode)");
@@ -333,6 +335,7 @@ private:
         dict->Add("PassDiffError", "Паролі павінны супадаць.");
         dict->Add("ExistingUserError", "Гэты карыстальнік ужо існуе.");
         dict->Add("LogInError", "Памылка ўваходу.");
+        dict->Add("IncorDataError", "Няправільнае імя або пароль.");
 
         dict->Add("WelcomeStr", "Сардэчна запрашаем ");
         dict->Add("SelectedMode", " (Гасцявы рэжым)");

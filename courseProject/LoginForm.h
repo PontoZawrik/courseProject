@@ -435,7 +435,7 @@ namespace courseProject {
 				this->Close();
 			}
 			else {
-				ErrorInfo->Text = GlobalSettings::GetLang("EmptyFieldsError");
+				ErrorInfo->Text = GlobalSettings::GetLang("IncorDataError");
 			}
 		}
 		else {
@@ -543,12 +543,14 @@ namespace courseProject {
 		if (PasswordInp->Text == GlobalSettings::GetLang("PasswordInp")) {
 			PasswordInp->Text = "";
 			PasswordInp->ForeColor = Color::Black;
+			PasswordInp->UseSystemPasswordChar = true;
 		}
 	}
 	private: System::Void PasswordInp_Leave(System::Object^ sender, System::EventArgs^ e) {
 		if (PasswordInp->Text == "") {
 			PasswordInp->Text = GlobalSettings::GetLang("PasswordInp");
 			PasswordInp->ForeColor = Color::Gray;
+			PasswordInp->UseSystemPasswordChar = false;
 		}
 	}
 	private: System::Void PasswordInp_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
@@ -561,12 +563,14 @@ namespace courseProject {
 		if (PasswordConfInp->Text == GlobalSettings::GetLang("PasswordConfInp")) {
 			PasswordConfInp->Text = "";
 			PasswordConfInp->ForeColor = Color::Black;
+			PasswordConfInp->UseSystemPasswordChar = true;
 		}
 	}
 	private: System::Void PasswordConfInp_Leave(System::Object^ sender, System::EventArgs^ e) {
 		if (PasswordConfInp->Text == "") {
 			PasswordConfInp->Text = GlobalSettings::GetLang("PasswordConfInp");
 			PasswordConfInp->ForeColor = Color::Gray;
+			PasswordConfInp->UseSystemPasswordChar = false;
 		}
 	}
 	private: System::Void PasswordConfInp_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
